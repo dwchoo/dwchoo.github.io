@@ -34,4 +34,13 @@ Docker의 Container는 우리가 사용할 가상 환경이라고 생각하면 �
 * ### Image
 Docker image는 Container의 환경을 정의해 놓은 틀이다. 즉 내가 원하는 환경을 정의해서 Docker image를 만들면 이 image를 불러와서 Container를 만드는 것이다. 이 Docker image는 Dockerfile(소스코드)를 통해서 Build하여 만들거나 이미 존재하는 환경을 Commit하여 만들 수 있다.(Commit 보다는 Dockerfile를 사용하여 만드는 것을 추천한다)
 ![Docker-hub](./image/docker-hub-tensorflow.png)  
-위와 같이 [hub.docker.com](https://hub.docker.com)에는 많은 환경의 이미지가 존재한다.
+위와 같이 [hub.docker.com](https://hub.docker.com)에는 많은 환경의 이미지가 존재한다.  
+
+## Portainer - 도커 사용을 위하 보조자
+Docker를 사용하다 보면 익숙하지 않은 command line이나 설정 때문에 애먹을 때가 있다. 이를 도와주고 관리하게 도와주는 GUI 도구가 있다. 바로 **Portainer**이다.  
+![Portainer](./image/portainer.png)
+Portainer의 공식 홈페이지는 [https://www.portainer.io](https://www.portainer.io)이며 다음과 같은 순서로 설치할 수 있다.  
+```bash
+$ docker volume create portainer_data
+$ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+```
