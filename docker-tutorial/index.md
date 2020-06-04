@@ -13,4 +13,6 @@
   $ sudo apt-get update
   $ sudo apt-get install docker-ce docker-ce-cli containerd.io
   ```
-
+---
+## Docker, Container, Image
+![Docker](./image/what-is-container.png)
