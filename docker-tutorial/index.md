@@ -36,6 +36,7 @@ Docker image는 Container의 환경을 정의해 놓은 틀이다. 즉 내가 �
 ![Docker-hub](./image/docker-hub-tensorflow.png)  
 위와 같이 [hub.docker.com](https://hub.docker.com)에는 많은 환경의 이미지가 존재한다.  
 
+---
 ## Portainer - 도커 사용을 위하 보조자
 Docker를 사용하다 보면 익숙하지 않은 command line이나 설정 때문에 애먹을 때가 있다. 이를 도와주고 관리하게 도와주는 GUI 도구가 있다. 바로 **Portainer**이다.  
 ![Portainer](./image/portainer.png)
