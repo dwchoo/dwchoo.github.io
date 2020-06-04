@@ -33,3 +33,5 @@ Docker의 Container는 우리가 사용할 가상 환경이라고 생각하면 �
 
 * ### Image
 Docker image는 Container의 환경을 정의해 놓은 틀이다. 즉 내가 원하는 환경을 정의해서 Docker image를 만들면 이 image를 불러와서 Container를 만드는 것이다. 이 Docker image는 Dockerfile(소스코드)를 통해서 Build하여 만들거나 이미 존재하는 환경을 Commit하여 만들 수 있다.(Commit 보다는 Dockerfile를 사용하여 만드는 것을 추천한다)
+![Docker-hub](./image/docker-hub-tensorflow.png)  
+위와 같이 [hub.docker.com](https://hub.docker.com)에는 많은 환경의 이미지가 존재한다.
