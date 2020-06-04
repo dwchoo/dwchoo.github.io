@@ -1,4 +1,4 @@
 # Docker tutorial
 ---
 ## Docker install
-* ### Install Docker on Windows 10
+### * Install Docker on Windows 10
