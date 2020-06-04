@@ -15,7 +15,7 @@
   ```
 ---
 ## Docker, Container, Image
-![Docker](./image/what-is-container.png)
+![Docker](./image/docker.png)
 * ### Docker
 Docker는 **컨테이너 기반의 가상화 플랫폼**이다. 이는 Virtual machine으로 OS를 구동하는 것과는 차이가 있다.  
 ![Docker vs VM](./image/containerized-and-vm-transparent-bg.png)
