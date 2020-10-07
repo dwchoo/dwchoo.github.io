@@ -44,5 +44,5 @@ Docker를 사용하다 보면 익숙하지 않은 command 창이나 옵션 때�
 Portainer의 공식 홈페이지는 [https://www.portainer.io](https://www.portainer.io)이며 다음과 같은 순서로 설치할 수 있다.  
 ```bash
 $ docker volume create portainer_data
-$ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+$ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
 ```
