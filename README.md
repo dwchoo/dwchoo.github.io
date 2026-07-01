@@ -1,37 +1,19 @@
-## Welcome to GitHub Pages
+# dwchoo.github.io
 
-You can use the [editor on GitHub](https://github.com/dwchoo/dwchoo.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+추동원 개인 홈페이지용 GitHub Pages 저장소입니다.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## 구성
 
-### Markdown
+- `index.html`: 영문/한글 토글을 포함한 메인 홈페이지
+- `assets/css/styles.css`: 홈페이지 전용 스타일
+- `assets/js/site.js`: 언어 전환 및 사용자 언어 선택 저장
+- `assets/img/research/hdf-ec/`: HDF-EC input/result 비교 viewer용 웹 이미지
+- `content/home.en.md`: 영문 홈페이지 원고 기준 파일
+- `content/home.kr.md`: 한글 홈페이지 원고 기준 파일
+- `docker-tutorial/`: 기존 Docker tutorial 문서
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## 작업 원칙
 
-```markdown
-Syntax highlighted code block
+홈페이지 본문을 수정할 때는 먼저 `content/home.en.md`와 `content/home.kr.md`를 갱신한 뒤 `index.html`에 반영합니다.
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/dwchoo/dwchoo.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+현재 프로젝트는 별도 build tool 없이 정적 HTML/CSS/JavaScript로 동작합니다.
