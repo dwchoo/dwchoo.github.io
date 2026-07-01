@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Dongwon Choo is a computer vision researcher and AI engineer working on image exposure restoration, low-light enhancement, and real-time vision AI systems."
+    >
+    <title>Dongwon Choo | Computer Vision Researcher & AI Engineer</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23151719'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='Arial,sans-serif' font-size='22' font-weight='700' fill='white'%3EDC%3C/text%3E%3C/svg%3E"
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="assets/css/styles.css">
+  </head>
+  <body data-lang="en">
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Dongwon Choo home">
+        <span class="brand-mark">DC</span>
+        <span>
+          <span class="brand-name">Dongwon Choo</span>
+          <span class="brand-role">Computer Vision Researcher</span>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#research" data-i18n-en="Research" data-i18n-kr="연구">Research</a>
+        <a href="#experience" data-i18n-en="Experience" data-i18n-kr="경력">Experience</a>
+        <a href="#publications" data-i18n-en="Publications" data-i18n-kr="논문">Publications</a>
+        <a href="#projects" data-i18n-en="Projects" data-i18n-kr="프로젝트">Projects</a>
+      </nav>
+
+      <div class="language-switch" aria-label="Language switcher">
+        <button type="button" class="lang-button is-active" data-lang-button="en" aria-pressed="true">EN</button>
+        <button type="button" class="lang-button" data-lang-button="kr" aria-pressed="false">KR</button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy lang-panel" data-lang-panel="en">
+          <p class="eyebrow">Computer Vision Researcher & AI Engineer</p>
+          <h1>Dongwon Choo</h1>
+          <p class="hero-lead">
+            I work on image exposure restoration, low-light enhancement, and self-supervised learning,
+            with a focus on efficient vision models that can move from research prototypes to practical deployment.
+          </p>
+          <div class="hero-meta" aria-label="Profile summary">
+            <span>Pusan National University</span>
+            <span>Computer Vision</span>
+            <span>Python / Go</span>
+          </div>
+          <div class="hero-actions" aria-label="Profile links">
+            <a class="button button-primary" href="https://github.com/dwchoo" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="button button-secondary" href="https://www.linkedin.com/in/dwchoo1991/" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+        </div>
+
+        <div class="hero-copy lang-panel" data-lang-panel="kr">
+          <p class="eyebrow">Computer Vision Researcher & AI Engineer</p>
+          <h1>추동원</h1>
+          <p class="hero-lead">
+            image exposure restoration, low-light enhancement, self-supervised learning을 중심으로 연구하며,
+            연구 모델을 실제 적용 가능한 효율적인 vision system으로 연결하는 데 집중합니다.
+          </p>
+          <div class="hero-meta" aria-label="프로필 요약">
+            <span>부산대학교</span>
+            <span>Computer Vision</span>
+            <span>Python / Go</span>
+          </div>
+          <div class="hero-actions" aria-label="프로필 링크">
+            <a class="button button-primary" href="https://github.com/dwchoo" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="button button-secondary" href="https://www.linkedin.com/in/dwchoo1991/" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section comparison-section" aria-label="HDF-EC visual comparison">
+        <div class="comparison-shell">
+          <div class="comparison-toolbar" aria-label="Result controls">
+            <button type="button" class="comparison-button" data-result-prev aria-label="Previous sample">&larr;</button>
+            <button type="button" class="comparison-button" data-result-next aria-label="Next sample">&rarr;</button>
+          </div>
+
+          <div class="comparison-viewer" style="--compare-position: 50%; --result-aspect-ratio: 960 / 720; --result-max-width: 960px;">
+            <div class="comparison-media">
+              <img
+                class="comparison-after"
+                src="assets/img/research/hdf-ec/lsrw-huawei-2049-result.jpg"
+                alt="HDF-EC result for LSRW-Huawei-low"
+                width="960"
+                height="720"
+                data-result-image
+              >
+              <div class="comparison-before">
+                <img
+                  src="assets/img/research/hdf-ec/lsrw-huawei-2049-input.jpg"
+                  alt="Input for LSRW-Huawei-low"
+                  width="960"
+                  height="720"
+                  data-input-image
+                >
+              </div>
+              <div class="comparison-divider" aria-hidden="true"></div>
+              <input
+                class="comparison-range"
+                type="range"
+                min="0"
+                max="100"
+                value="50"
+                aria-label="Input and HDF-EC result comparison position"
+                data-comparison-range
+              >
+            </div>
+          </div>
+
+          <div class="sample-selector" aria-label="Sample selector" data-sample-selector></div>
+        </div>
+      </section>
+
+      <section class="section two-column" id="research">
+        <div class="section-heading lang-panel" data-lang-panel="en">
+          <p class="eyebrow">Research</p>
+          <h2>Unified image exposure restoration</h2>
+        </div>
+        <div class="section-heading lang-panel" data-lang-panel="kr">
+          <p class="eyebrow">Research</p>
+          <h2>Unified image exposure restoration</h2>
+        </div>
+
+        <div class="section-body lang-panel" data-lang-panel="en">
+          <p>
+            I am a computer vision researcher and AI engineer specializing in image exposure restoration,
+            low-light enhancement, and self-supervised learning.
+          </p>
+          <p>
+            My doctoral research focuses on unified image exposure restoration for challenging real-world
+            illumination conditions, including low-light, over-exposed, and backlit scenes. Instead of treating
+            under-exposure and over-exposure as separate problems, this work reformulates them as a single
+            exposure restoration task that aims to recover visually natural brightness, color, contrast, and
+            structural details.
+          </p>
+          <p>
+            The core contribution is HDF-EC, a Hierarchical Dual-Flow architecture for efficient and consistent
+            exposure correction. It combines a CNN-based low-level module for local texture and brightness
+            refinement with a Transformer-based high-level module for global exposure and structural consistency.
+          </p>
+          <div class="topic-block">
+            <h3>Research Topics</h3>
+            <ul class="topic-list">
+              <li>Low-light image enhancement</li>
+              <li>Image exposure correction</li>
+              <li>Self-supervised learning for image restoration</li>
+              <li>Unified exposure restoration for low-light, over-exposed, and backlit scenes</li>
+              <li>Efficient vision model deployment</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-body lang-panel" data-lang-panel="kr">
+          <p>
+            image exposure restoration, low-light enhancement, self-supervised learning을 연구하는 computer vision
+            연구자이자 AI engineer입니다.
+          </p>
+          <p>
+            박사학위논문은 low-light, over-exposed, backlit scene처럼 실제 환경에서 자주 발생하는 까다로운
+            조명 조건을 대상으로 하는 unified image exposure restoration에 초점을 둡니다. under-exposure와
+            over-exposure를 별개의 문제로 다루기보다, 밝기, 색상, 대비, 구조적 디테일을 자연스럽게 복원하는
+            하나의 exposure restoration 문제로 재정의했습니다.
+          </p>
+          <p>
+            핵심 기여는 효율적이고 일관된 exposure correction을 위한 HDF-EC, 즉 Hierarchical Dual-Flow
+            architecture입니다. local texture와 brightness refinement를 담당하는 CNN 기반 low-level module과
+            global exposure 및 structural consistency를 담당하는 Transformer 기반 high-level module을 결합합니다.
+          </p>
+          <div class="topic-block">
+            <h3>연구 주제</h3>
+            <ul class="topic-list">
+              <li>Low-light image enhancement</li>
+              <li>Image exposure correction</li>
+              <li>Self-supervised learning 기반 image restoration</li>
+              <li>Low-light, over-exposed, backlit scene을 아우르는 unified exposure restoration</li>
+              <li>Efficient vision model deployment</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section timeline-section" id="experience">
+        <div class="section-title-row">
+          <div class="lang-panel" data-lang-panel="en">
+            <p class="eyebrow">Background</p>
+            <h2>Education & Experience</h2>
+          </div>
+          <div class="lang-panel" data-lang-panel="kr">
+            <p class="eyebrow">Background</p>
+            <h2>학력 및 경력</h2>
+          </div>
+        </div>
+
+        <div class="timeline lang-panel" data-lang-panel="en">
+          <article class="timeline-item">
+            <span class="timeline-date">2010.03 - 2017.02</span>
+            <h3>Pusan National University</h3>
+            <p>B.S. in Electronics Engineering</p>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-date">2018.09 - 2026.08 expected</span>
+            <h3>Pusan National University</h3>
+            <p>Ph.D. in Information Convergence Engineering, AI Major</p>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-date">2023.01 - 2025.06</span>
+            <h3>InBic Inc. (startup)</h3>
+            <p>AI Development Team Lead / Senior Researcher</p>
+            <ul>
+              <li>Developed real-time vision AI models and operation systems.</li>
+              <li>Developed and optimized lightweight vision AI models using PyTorch, TensorFlow, TensorRT, NVIDIA Triton, and DeepStream.</li>
+              <li>Built high-speed video processing and real-time AI relay systems for H.264/H.265 RTSP streams using Go, OpenCV, and GoCV.</li>
+              <li>Developed edge-device vision AI solutions using Jetson and DeepStream.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="timeline lang-panel" data-lang-panel="kr">
+          <article class="timeline-item">
+            <span class="timeline-date">2010.03 - 2017.02</span>
+            <h3>부산대학교</h3>
+            <p>전자공학과 학사</p>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-date">2018.09 - 2026.08 예정</span>
+            <h3>부산대학교</h3>
+            <p>정보융합공학과 AI 전공 박사</p>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-date">2023.01 - 2025.06</span>
+            <h3>인빅 주식회사 (스타트업)</h3>
+            <p>AI 개발 팀장 / 책임 연구원</p>
+            <ul>
+              <li>실시간 Vision AI 모델 개발 및 운용 시스템 개발</li>
+              <li>PyTorch, TensorFlow, TensorRT, NVIDIA Triton, DeepStream 기반 Vision AI 모델 개발 및 초경량화 수행</li>
+              <li>Go, OpenCV, GoCV를 활용해 H.264/H.265 RTSP 스트리밍 영상의 고속 처리, 실시간 AI 변환 및 중계 시스템을 개발</li>
+              <li>Jetson, DeepStream 기반 edge-device Vision AI 솔루션을 개발</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="publications">
+        <div class="section-title-row lang-panel" data-lang-panel="en">
+          <div>
+            <p class="eyebrow">Selected Work</p>
+            <h2>Publications</h2>
+          </div>
+        </div>
+        <div class="section-title-row lang-panel" data-lang-panel="kr">
+          <div>
+            <p class="eyebrow">Selected Work</p>
+            <h2>주요 논문</h2>
+          </div>
+        </div>
+
+        <ol class="publication-list">
+          <li>
+            <p>
+              <strong>D. Choo</strong>, Q. Deng, T. Park, and D. Lee,
+              "HVR-SSLE: Hierarchical Visual Reasoning for Self-Supervised Low-Light Image Enhancement,"
+              <em>IEEE Access</em>, vol. 14, pp. 34705-34725, 2026.
+            </p>
+          </li>
+          <li>
+            <p>
+              Q. Deng, <strong>D. Choo</strong>, H. Ji, and D. Lee,
+              "A 5K Efficient Low-Light Enhancement Model by Estimating Increment between Dark Image and
+              Transmission Map Based on Local Maximum Color Value Prior,"
+              <em>Electronics</em>, vol. 13, p. 1814, 2024.
+            </p>
+          </li>
+          <li>
+            <p>
+              M.-j. Kim, Q. Deng, <strong>D. Choo</strong>, H. C. Ji, and D. Lee,
+              "AGCSNet: High-contrast image-exposure correction with automatic illumination-map
+              attention-based gamma and saturation correction,"
+              <em>ETRI Journal</em>, 2025.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section project-section" id="projects">
+        <div class="section-title-row lang-panel" data-lang-panel="en">
+          <div>
+            <p class="eyebrow">Projects</p>
+            <h2>Research implementation & open source</h2>
+          </div>
+        </div>
+        <div class="section-title-row lang-panel" data-lang-panel="kr">
+          <div>
+            <p class="eyebrow">Projects</p>
+            <h2>연구 구현 및 open source</h2>
+          </div>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-item lang-panel" data-lang-panel="en">
+            <div class="project-kicker">PyTorch / Low-Light Enhancement</div>
+            <h3><a href="https://github.com/dwchoo/HVR-SSLE" target="_blank" rel="noreferrer">HVR-SSLE</a></h3>
+            <p>
+              Official PyTorch implementation of the HVR-SSLE paper, which proposes a compact self-supervised
+              low-light image enhancement model. The repository includes training and inference pipelines,
+              dataset configuration, checkpoint handling, and analysis resources for reproducible research.
+            </p>
+          </article>
+
+          <article class="project-item lang-panel" data-lang-panel="kr">
+            <div class="project-kicker">PyTorch / Low-Light Enhancement</div>
+            <h3><a href="https://github.com/dwchoo/HVR-SSLE" target="_blank" rel="noreferrer">HVR-SSLE</a></h3>
+            <p>
+              compact self-supervised low-light image enhancement 모델을 제안한 HVR-SSLE 논문의 official PyTorch
+              implementation을 공개함. Training/inference pipeline, dataset configuration, checkpoint handling,
+              analysis resource를 포함해 연구 재현성을 고려함
+            </p>
+          </article>
+
+          <article class="project-item lang-panel" data-lang-panel="en">
+            <div class="project-kicker">Go / OpenCV</div>
+            <h3>GoCV Contribution</h3>
+            <p>
+              Contributed to GoCV, a Go package for computer vision using OpenCV. This reflects my interest in
+              connecting computer vision research with practical software engineering.
+            </p>
+          </article>
+
+          <article class="project-item lang-panel" data-lang-panel="kr">
+            <div class="project-kicker">Go / OpenCV</div>
+            <h3>GoCV Contribution</h3>
+            <p>
+              OpenCV 기반 Go computer vision library인 GoCV에 기여함. Computer vision 연구를 실제 소프트웨어
+              구현과 연결하는 open-source contribution 수행
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section skills-section">
+        <div class="section-title-row lang-panel" data-lang-panel="en">
+          <div>
+            <p class="eyebrow">Skills</p>
+            <h2>Technical focus</h2>
+          </div>
+        </div>
+        <div class="section-title-row lang-panel" data-lang-panel="kr">
+          <div>
+            <p class="eyebrow">Skills</p>
+            <h2>기술 역량</h2>
+          </div>
+        </div>
+
+        <div class="skill-cloud" aria-label="Technical skills">
+          <span>Computer Vision</span>
+          <span>Low-Light Enhancement</span>
+          <span>Image Exposure Correction</span>
+          <span>Self-Supervised Learning</span>
+          <span>Python</span>
+          <span>Go</span>
+          <span>PyTorch</span>
+          <span>TensorFlow</span>
+          <span>TensorRT</span>
+          <span>NVIDIA Triton</span>
+          <span>OpenCV</span>
+          <span>GoCV</span>
+          <span>Jetson</span>
+          <span>DeepStream</span>
+          <span>RTSP Streaming</span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 Dongwon Choo</span>
+      <span class="footer-links">
+        <a href="https://github.com/dwchoo" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/dwchoo1991/" target="_blank" rel="noreferrer">LinkedIn</a>
+      </span>
+    </footer>
+
+    <script src="assets/js/site.js"></script>
+  </body>
+</html>
