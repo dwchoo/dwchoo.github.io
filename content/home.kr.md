@@ -2,7 +2,7 @@
 
 Computer Vision Researcher & AI Engineer
 
-저는 image exposure restoration, low-light enhancement, self-supervised learning을 중심으로 연구하며, 연구 모델을 실제 적용 가능한 효율적인 vision system으로 연결하는 데 관심이 있습니다.
+Computer vision을 중심으로 AI model과 self-supervised learning을 연구하며, 실제 환경에 적용 가능한 AI system 개발에 관심이 있습니다.
 
 - GitHub: <https://github.com/dwchoo>
 - LinkedIn: <https://www.linkedin.com/in/dwchoo1991/>
