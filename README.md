@@ -2,6 +2,8 @@
 
 추동원 개인 홈페이지용 GitHub Pages 저장소입니다.
 
+웹페이지: <https://dwchoo.github.io>
+
 ## 구성
 
 - `index.html`: 영문/한글 토글을 포함한 메인 홈페이지

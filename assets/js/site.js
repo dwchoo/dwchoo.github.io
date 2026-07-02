@@ -90,14 +90,6 @@
     });
   }
 
-  function getResultMaxWidth(result) {
-    if (result.width < result.height) {
-      return `${Math.min(result.width, 520)}px`;
-    }
-
-    return `${Math.min(result.width, 1080)}px`;
-  }
-
   function setComparePosition(value) {
     comparePosition = Number(value);
     const viewer = document.querySelector(".comparison-viewer");
@@ -119,8 +111,6 @@
     }
 
     currentResultIndex = index;
-    viewer.style.setProperty("--result-aspect-ratio", `${result.width} / ${result.height}`);
-    viewer.style.setProperty("--result-max-width", getResultMaxWidth(result));
 
     inputImage.src = result.inputSrc;
     inputImage.alt = `Input for ${result.dataset}`;
