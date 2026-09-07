@@ -82,46 +82,58 @@
         </div>
       </section>
 
-      <section class="section comparison-section" aria-label="HDF-EC visual comparison">
-        <div class="comparison-shell">
-          <div class="comparison-toolbar" aria-label="Result controls">
-            <button type="button" class="comparison-button" data-result-prev aria-label="Previous sample">&larr;</button>
-            <button type="button" class="comparison-button" data-result-next aria-label="Next sample">&rarr;</button>
+      <section class="section comparison-section" aria-label="Project results" data-i18n-aria-en="Project results" data-i18n-aria-kr="프로젝트 결과">
+        <div class="result-tabs" role="tablist" aria-label="Project results" data-i18n-aria-en="Project results" data-i18n-aria-kr="프로젝트 결과">
+          <button type="button" id="tab-vggt" role="tab" aria-controls="panel-vggt" aria-selected="true" tabindex="0">VGGT-ISAAC-SIM</button>
+          <span aria-hidden="true">|</span>
+          <button type="button" id="tab-hdf" role="tab" aria-controls="panel-hdf" aria-selected="false" tabindex="-1">HDF-EC</button>
+        </div>
+        <div id="panel-vggt" role="tabpanel" aria-labelledby="tab-vggt" tabindex="0">
+          <div class="pointcloud-viewer" data-pointcloud-viewer aria-busy="true">
+            <p class="viewer-status" role="status" aria-live="polite" data-i18n-en="Loading 3D reconstruction…" data-i18n-kr="3D 재구성을 불러오는 중…" data-viewer-status>Loading 3D reconstruction…</p>
           </div>
+        </div>
+        <div id="panel-hdf" role="tabpanel" aria-labelledby="tab-hdf" tabindex="0" hidden>
+          <div class="comparison-shell">
+            <div class="comparison-toolbar" aria-label="Result controls" data-i18n-aria-en="Result controls" data-i18n-aria-kr="결과 조작">
+              <button type="button" class="comparison-button" data-result-prev aria-label="Previous sample" data-i18n-aria-en="Previous sample" data-i18n-aria-kr="이전 샘플">&larr;</button>
+              <button type="button" class="comparison-button" data-result-next aria-label="Next sample" data-i18n-aria-en="Next sample" data-i18n-aria-kr="다음 샘플">&rarr;</button>
+            </div>
 
-          <div class="comparison-viewer" style="--compare-position: 50%;">
-            <div class="comparison-media">
-              <img
-                class="comparison-after"
-                src="assets/img/research/hdf-ec/lsrw-huawei-2049-result.jpg"
-                alt="HDF-EC result for LSRW-Huawei-low"
-                width="960"
-                height="720"
-                data-result-image
-              >
-              <div class="comparison-before">
+            <div class="comparison-viewer" style="--compare-position: 50%;">
+              <div class="comparison-media">
                 <img
-                  src="assets/img/research/hdf-ec/lsrw-huawei-2049-input.jpg"
-                  alt="Input for LSRW-Huawei-low"
+                  class="comparison-after"
+                  src="assets/img/research/hdf-ec/lsrw-huawei-2049-result.jpg"
+                  alt="HDF-EC result for LSRW-Huawei-low"
                   width="960"
                   height="720"
-                  data-input-image
+                  data-result-image
+                >
+                <div class="comparison-before">
+                  <img
+                    src="assets/img/research/hdf-ec/lsrw-huawei-2049-input.jpg"
+                    alt="Input for LSRW-Huawei-low"
+                    width="960"
+                    height="720"
+                    data-input-image
+                  >
+                </div>
+                <div class="comparison-divider" aria-hidden="true"></div>
+                <input
+                  class="comparison-range"
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="50"
+                  aria-label="Input and HDF-EC result comparison position" data-i18n-aria-en="Input and HDF-EC result comparison position" data-i18n-aria-kr="입력과 HDF-EC 결과 비교 위치"
+                  data-comparison-range
                 >
               </div>
-              <div class="comparison-divider" aria-hidden="true"></div>
-              <input
-                class="comparison-range"
-                type="range"
-                min="0"
-                max="100"
-                value="50"
-                aria-label="Input and HDF-EC result comparison position"
-                data-comparison-range
-              >
             </div>
-          </div>
 
-          <div class="sample-selector" aria-label="Sample selector" data-sample-selector></div>
+            <div class="sample-selector" aria-label="Sample selector" data-i18n-aria-en="Sample selector" data-i18n-aria-kr="샘플 선택" data-sample-selector></div>
+          </div>
         </div>
       </section>
 
@@ -140,6 +152,7 @@
             I am a computer vision researcher and AI engineer specializing in image exposure restoration,
             low-light enhancement, and self-supervised learning.
           </p>
+          <p>I am also interested in 3D vision and simulation with NVIDIA Isaac Sim.</p>
           <p>
             My doctoral research focuses on unified image exposure restoration for challenging real-world
             illumination conditions, including low-light, over-exposed, and backlit scenes. Instead of treating
@@ -169,6 +182,7 @@
             image exposure restoration, low-light enhancement, self-supervised learning을 연구하는 computer vision
             연구자이자 AI engineer입니다.
           </p>
+          <p>3D vision과 NVIDIA Isaac Sim을 활용한 시뮬레이션에도 관심이 있습니다.</p>
           <p>
             박사학위논문은 low-light, over-exposed, backlit scene처럼 실제 환경에서 자주 발생하는 까다로운
             조명 조건을 대상으로 하는 unified image exposure restoration에 초점을 둡니다. under-exposure와
@@ -310,6 +324,16 @@
         </div>
 
         <div class="project-grid">
+          <article class="project-item lang-panel" data-lang-panel="en">
+            <div class="project-kicker">3D Vision / OpenUSD / Isaac Sim</div>
+            <h3><a href="https://github.com/dwchoo/vggt-isaac-sim" target="_blank" rel="noreferrer">VGGT-ISAAC-SIM</a></h3>
+            <p>Developed a pipeline for VGGT-based multi-view 3D reconstruction, OpenUSD export, and visualization in Isaac Sim.</p>
+          </article>
+          <article class="project-item lang-panel" data-lang-panel="kr">
+            <div class="project-kicker">3D Vision / OpenUSD / Isaac Sim</div>
+            <h3><a href="https://github.com/dwchoo/vggt-isaac-sim" target="_blank" rel="noreferrer">VGGT-ISAAC-SIM</a></h3>
+            <p>VGGT 기반 다중 시점 3D 재구성, OpenUSD 내보내기 및 Isaac Sim 시각화 파이프라인 개발</p>
+          </article>
           <article class="project-item lang-panel" data-lang-panel="en">
             <div class="project-kicker">PyTorch / Low-Light Enhancement</div>
             <h3><a href="https://github.com/dwchoo/HVR-SSLE" target="_blank" rel="noreferrer">HVR-SSLE</a></h3>

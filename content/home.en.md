@@ -13,6 +13,8 @@ I am a computer vision researcher and AI engineer specializing in image exposure
 
 My work focuses on restoring degraded images under challenging illumination conditions while maintaining practical computational efficiency. I have experience developing deep learning models in Python and production-oriented software in Go, and I have contributed to GoCV, an OpenCV-based computer vision library for Go.
 
+I am also interested in 3D vision and simulation with NVIDIA Isaac Sim.
+
 ## Dissertation Research
 
 My doctoral research focuses on **unified image exposure restoration** for challenging real-world illumination conditions, including low-light, over-exposed, and backlit scenes. Instead of treating under-exposure and over-exposure as separate problems, this work reformulates them as a single exposure restoration task that aims to recover visually natural brightness, color, contrast, and structural details.
@@ -43,6 +45,10 @@ AI Development Team Lead / Senior Researcher
 - M.-j. Kim, Q. Deng, **D. Choo**, H. C. Ji, and D. Lee, "AGCSNet: High-contrast image-exposure correction with automatic illumination-map attention-based gamma and saturation correction," *ETRI Journal*, 2025.
 
 ## Projects
+
+### VGGT-ISAAC-SIM
+
+[VGGT-ISAAC-SIM](https://github.com/dwchoo/vggt-isaac-sim): Developed a pipeline for VGGT-based multi-view 3D reconstruction, OpenUSD export, and visualization in Isaac Sim.
 
 ### HVR-SSLE
 

@@ -13,6 +13,8 @@ Computer vision을 중심으로 AI model과 self-supervised learning을 연구�
 
 제 연구는 실제 환경에서 발생하는 다양한 조명 열화 문제를 복원하면서도, 실제 배포 가능한 수준의 계산 효율성을 갖춘 vision model을 만드는 데 초점을 둡니다. Python 기반 딥러닝 연구 구현과 Go 기반 소프트웨어 개발 경험을 함께 갖고 있으며, OpenCV 기반 Go computer vision library인 GoCV에도 기여했습니다.
 
+3D vision과 NVIDIA Isaac Sim을 활용한 시뮬레이션에도 관심이 있습니다.
+
 ## 학위논문 연구
 
 제 박사학위논문은 low-light, over-exposed, backlit scene처럼 실제 환경에서 자주 발생하는 까다로운 조명 조건을 대상으로 하는 **unified image exposure restoration**에 초점을 둡니다. 기존처럼 under-exposure와 over-exposure를 별개의 문제로 다루기보다, 밝기, 색상, 대비, 구조적 디테일을 자연스럽게 복원하는 하나의 exposure restoration 문제로 재정의했습니다.
@@ -43,6 +45,10 @@ AI 개발 팀장 / 책임 연구원
 - M.-j. Kim, Q. Deng, **D. Choo**, H. C. Ji, and D. Lee, "AGCSNet: High-contrast image-exposure correction with automatic illumination-map attention-based gamma and saturation correction," *ETRI Journal*, 2025.
 
 ## 프로젝트
+
+### VGGT-ISAAC-SIM
+
+[VGGT-ISAAC-SIM](https://github.com/dwchoo/vggt-isaac-sim): VGGT 기반 다중 시점 3D 재구성, OpenUSD 내보내기 및 Isaac Sim 시각화 파이프라인 개발
 
 ### HVR-SSLE
 

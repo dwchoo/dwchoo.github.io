@@ -64,12 +64,77 @@
 
   let currentResultIndex = 0;
   let comparePosition = 50;
+  let viewer = null;
+  let viewerImportFailed = false;
+  let stopped = false;
+  let currentTab = "tab-vggt";
+  const viewerModuleURL = new URL("pointcloud-viewer.js", document.currentScript.src);
+  const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+
+  function showModuleError() {
+    const host = document.querySelector("[data-pointcloud-viewer]");
+    if (!host) return;
+    host.dataset.viewerState = "module";
+    host.setAttribute("aria-busy", "false");
+    host.querySelector("[data-viewer-status]").textContent = body.dataset.lang === "kr"
+      ? "3D 뷰어를 시작할 수 없습니다. 페이지를 새로고침해 주세요."
+      : "The 3D viewer could not start. Please reload the page.";
+  }
+
+  function selectTab(id, focus = false) {
+    currentTab = id;
+    tabs.forEach((tab) => {
+      const selected = tab.id === id;
+      tab.setAttribute("aria-selected", String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+      document.getElementById(tab.getAttribute("aria-controls")).hidden = !selected;
+      if (selected && focus) tab.focus();
+    });
+    viewer?.setActive(id === "tab-vggt");
+  }
+
+  function setupResultTabs() {
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => selectTab(tab.id));
+      tab.addEventListener("keydown", (event) => {
+        const target = {
+          ArrowRight: (index + 1) % tabs.length,
+          ArrowLeft: (index - 1 + tabs.length) % tabs.length,
+          Home: 0,
+          End: tabs.length - 1,
+        }[event.key];
+        if (target === undefined) return;
+        event.preventDefault();
+        selectTab(tabs[target].id, true);
+      });
+    });
+    import(viewerModuleURL.href).then(({ createPointcloudViewer }) => {
+      const host = document.querySelector("[data-pointcloud-viewer]");
+      if (stopped || !host) return;
+      viewer = createPointcloudViewer(host, {
+        language: body.dataset.lang,
+        active: currentTab === "tab-vggt",
+      });
+    }).catch(() => {
+      if (stopped) return;
+      viewerImportFailed = true;
+      showModuleError();
+    });
+    window.addEventListener("pagehide", (event) => {
+      if (event.persisted) viewer?.setActive(false);
+      else {
+        stopped = true;
+        viewer?.dispose();
+      }
+    });
+    window.addEventListener("pageshow", () => viewer?.setActive(currentTab === "tab-vggt"));
+  }
 
   function getInitialLanguage() {
-    const stored = window.localStorage.getItem(storageKey);
-    if (stored === "en" || stored === "kr") {
-      return stored;
-    }
+    try {
+      const stored = window.localStorage.getItem(storageKey);
+      if (stored === "en" || stored === "kr") return stored;
+    } catch { /* Language switching also works when storage is disabled. */ }
 
     return "en";
   }
@@ -77,7 +142,7 @@
   function setLanguage(language) {
     body.dataset.lang = language;
     document.documentElement.lang = language === "kr" ? "ko" : "en";
-    window.localStorage.setItem(storageKey, language);
+    try { window.localStorage.setItem(storageKey, language); } catch { /* Optional persistence. */ }
 
     buttons.forEach((button) => {
       const isActive = button.dataset.langButton === language;
@@ -88,6 +153,11 @@
     translatedNodes.forEach((node) => {
       node.textContent = language === "kr" ? node.dataset.i18nKr : node.dataset.i18nEn;
     });
+    document.querySelectorAll("[data-i18n-aria-en]").forEach((node) => {
+      node.setAttribute("aria-label", language === "kr" ? node.dataset.i18nAriaKr : node.dataset.i18nAriaEn);
+    });
+    viewer?.setLanguage(language);
+    if (viewerImportFailed) showModuleError();
   }
 
   function setComparePosition(value) {
@@ -169,4 +239,5 @@
 
   setupResultComparison();
   setLanguage(getInitialLanguage());
+  setupResultTabs();
 })();
