@@ -9,38 +9,27 @@
 - `transforms.json`: `world_from_vggt=identity`
 - 입력 SHA-256: `92034ad03849352780485f2710a0dc810bf87131b277d170f26cc34d841c8c9b`
 
-이 정리본은 원본 카메라와 기존 점의 검증 기준으로 사용합니다. 현재 게시 데이터는 같은 run의 저장된 depth와 RGB 이미지에서 confidence percentile 50 조건으로 다시 추출했습니다. 기존 VGGT/Isaac Sim 프로젝트와 원본 run 파일은 수정하지 않았습니다.
+이 정리본을 그대로 사용했습니다. 필터링, 점 감소, 좌표 변환, 메시 생성은 수행하지 않았습니다. 기존 VGGT/Isaac Sim 프로젝트와 원본 run의 파일은 수정하지 않았습니다.
 
 ## 변환 결과
 
 - 출력: [`assets/data/vggt/pointcloud.ply`](../assets/data/vggt/pointcloud.ply)
 - 형식: binary little-endian PLY, 점당 15바이트(float32 XYZ + uint8 RGB)
-- 점 수: **2,266,250**
-- 파일 크기: **33,993,931바이트** (헤더 181바이트 + 점 데이터 33,993,750바이트)
-- 출력 SHA-256: `828926997ff67fa5256745160b76c2d070ed7a6c6e483ff0268c02d28b7670c9`
+- 점 수: **453,253**
+- 파일 크기: **6,798,975바이트** (헤더 180바이트 + 점 데이터 6,798,795바이트)
+- 출력 SHA-256: `a4c466a60928afd1df8d06219dd050561c70a204778b48071758b31850fe537a`
 - 부가 정보: [`pointcloud.json`](../assets/data/vggt/pointcloud.json)
-- 변환 환경: Python 3.12 가상환경, NumPy 2.5.3, Pillow 12.3.0
+- 변환 환경: Python 3.12 가상환경, NumPy 2.5.3
 
 실행 명령:
 
 ```sh
 /tmp/homepage-viewer-venv/bin/python scripts/export_pointcloud.py \
   --source-run /home/dwchoo/omniverse/isaac_sim/sim_data/local_data/vggt_web/jobs/766e4f73b8cf47f98d3f5c62d128b42d/runs/76792ce3d6414c049bedae5152fe084e \
-  --confidence-percentile 50 \
   --output assets/data/vggt/pointcloud.ply
 ```
 
-변환 스크립트의 왕복 검사에서 모든 출력 XYZ·RGB의 바이트와 점 순서가 재구성 결과와 일치했습니다. 재구성 시 기존 NPZ의 453,253개 source pixel index에 해당하는 XYZ·RGB가 원본과 바이트 단위로 일치하는지 확인했습니다. 이 기존 점들은 새 데이터에도 모두 포함됩니다. 입력 파일들의 SHA-256은 변환 전후 동일하며, 관련 해시는 `pointcloud.json`의 `reconstruction.source_files_sha256`에 기록했습니다. 유효하지 않은 입력·PNG 해시 변경·depth 불일치 등을 거부하는 테스트를 포함해 17개 변환 테스트를 통과했습니다.
-
-## 점 수를 늘린 방법
-
-- 원본 유효점: 4,532,500개. Padding, 비정상 depth/좌표/confidence는 제외합니다.
-- 최초 게시: percentile 90, 453,253점. PLY SHA-256은 `a4c466a60928afd1df8d06219dd050561c70a204778b48071758b31850fe537a`였습니다.
-- 현재: percentile 50, threshold `12.386348724365234`, 2,266,250점. 임의 샘플링과 point cap은 없습니다.
-- 기존 점 453,253개를 모두 유지하고 1,812,997개를 추가했습니다. 재추론이나 인공적인 점 복제는 수행하지 않았습니다.
-- 원본 `predictions.npz` SHA-256: `9451e2ce67ae19de10fa1d33109fe04ead7a9b49fafbda9d6a48278ea9c567d5`
-
-[원 프로젝트의 depth 후처리](https://github.com/dwchoo/vggt-isaac-sim/blob/main/src/vggt_runner/postprocess.py)와 [카메라 좌표 계산](https://github.com/dwchoo/vggt-isaac-sim/blob/main/src/geometry/camera.py)을 확인해 같은 방식으로 depth를 역투영했습니다. Confidence는 보정된 확률이 아닌 모델 점수입니다. 기준을 완화하면 표면 범위와 밀도가 늘지만 주변 노이즈도 늘어납니다. 원본 이미지·depth에 없는 가려진 면을 새로 생성하지는 않습니다.
+변환 스크립트의 왕복 검사와 별도 `numpy.frombuffer` 검사에서 모든 XYZ·RGB의 바이트와 점 순서가 일치했습니다. 변환 후 입력의 SHA-256도 동일했습니다. 유효하지 않은 입력을 거부하는 테스트를 포함해 11개 변환 테스트를 통과했습니다.
 
 ## 초기 카메라와 색상
 

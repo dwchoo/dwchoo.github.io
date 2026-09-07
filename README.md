@@ -10,7 +10,7 @@
 - `assets/css/styles.css`: 홈페이지 전용 스타일
 - `assets/js/site.js`: 언어 전환, 결과 탭, HDF-EC 샘플·비교 위치 관리
 - `assets/js/pointcloud-viewer.js`: 회전 전용 VGGT point cloud 뷰어
-- `assets/data/vggt/`: 2,266,250점 binary PLY와 해시·초기 카메라 정보
+- `assets/data/vggt/`: 453,253점 binary PLY와 해시·초기 카메라 정보
 - `assets/vendor/three/`: Three.js 0.185.0 모듈과 MIT 라이선스
 - `assets/img/research/hdf-ec/`: HDF-EC input/result 비교 viewer용 웹 이미지
 - `content/home.en.md`: 영문 홈페이지 원고 기준 파일
@@ -37,20 +37,19 @@ VGGT-ISAAC-SIM이 첫 번째 기본 탭입니다. 왼쪽 마우스 드래그 또
 
 ## 데이터 변환
 
-변환은 Python 가상환경과 NumPy를 사용합니다. 저장된 depth에서 점을 복원할 때는 PNG를 읽기 위한 Pillow도 필요합니다. 홈페이지 실행에는 Python 패키지가 필요하지 않습니다.
+변환은 Python 가상환경과 NumPy만 필요합니다. 홈페이지 실행에는 Python이나 NumPy가 필요하지 않습니다.
 
 ```sh
 python3 -m venv /tmp/homepage-viewer-venv
-/tmp/homepage-viewer-venv/bin/pip install numpy==2.5.3 pillow==12.3.0
+/tmp/homepage-viewer-venv/bin/pip install numpy==2.5.3
 /tmp/homepage-viewer-venv/bin/python scripts/export_pointcloud.py \
   --source-run /home/dwchoo/omniverse/isaac_sim/sim_data/local_data/vggt_web/jobs/766e4f73b8cf47f98d3f5c62d128b42d/runs/76792ce3d6414c049bedae5152fe084e \
-  --confidence-percentile 50 \
   --output assets/data/vggt/pointcloud.ply
 ```
 
-`--source-run`은 `pointcloud.npz`, `run_summary.json`, `transforms.json`을 포함한 완료 run 디렉터리입니다. 스크립트는 기록된 점 수, float32 XYZ, uint8 RGB, 배열 크기·유효성, 첫 카메라의 회전 행렬과 `world_from_vggt=identity`를 검사합니다. `--confidence-percentile`을 생략하면 기존 NPZ의 점을 그대로 변환합니다. 지정하면 `predictions.npz`의 depth·intrinsic과 기존 camera transform, `processed_images/`의 RGB로 재구성하고 해당 confidence percentile 이상의 유효한 점을 모두 사용합니다. 점 수 제한이나 임의 샘플링, 메시 생성은 적용하지 않습니다. 두 방식 모두 frame/pixel 순서대로 little-endian PLY로 내보내며, 좌표·색상의 왕복 일치와 원본 해시를 확인합니다. 출력 `.json`에는 점 수·파일 크기·SHA-256·초기 카메라 방향을 기록합니다.
+`--source-run`은 `pointcloud.npz`, `run_summary.json`, `transforms.json`을 포함한 완료 run 디렉터리입니다. 스크립트는 기록된 점 수, float32 XYZ, uint8 RGB, 배열 크기·유효성, 첫 카메라의 회전 행렬과 `world_from_vggt=identity`를 검사합니다. 필터링·점 감소·메시 생성 없이 순서 그대로 little-endian PLY로 내보내며, 모든 좌표·색상의 왕복 일치와 원본 해시를 확인합니다. 출력 `.json`에는 점 수·파일 크기·SHA-256·초기 카메라 방향을 기록합니다.
 
-현재 PLY는 33,993,931바이트(약 34 MB), 2,266,250점입니다. 최초 버전은 confidence percentile 90 조건의 453,253점이었고, 물체 표면이 일부 빠져 보여 기준을 percentile 50으로 완화했습니다. 원본 유효점 4,532,500개 중 절반을 사용하며, 기존 453,253점의 XYZ·RGB는 모두 그대로 포함합니다. Confidence가 낮은 점이 추가되어 표면 범위와 밀도가 늘고 일부 주변 노이즈도 함께 늘어납니다. 원본과 출력 해시, 좌표·색상 처리 및 vendor 출처는 [데이터 기록](docs/pointcloud-provenance.md)에 있습니다.
+현재 PLY는 6,798,975바이트입니다. 입력은 이미 confidence percentile 90 조건으로 정리된 데이터이며, 홈페이지 변환에서 조건을 다시 적용하지 않습니다. 원본과 출력 해시, 좌표·색상 처리 및 vendor 출처는 [데이터 기록](docs/pointcloud-provenance.md)에 있습니다.
 
 ## 검증
 

@@ -10,12 +10,6 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "docs/verification"
-MANIFEST = json.loads((ROOT / "assets/data/vggt/pointcloud.json").read_text())
-POINT_COUNT = MANIFEST["point_count"]
-with (ROOT / "assets/data/vggt/pointcloud.ply").open("rb") as ply:
-    while ply.readline() != b"end_header\n":
-        pass
-    FIRST_RGB = tuple(ply.read(15)[12:15])
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -130,10 +124,10 @@ def run():
             page.goto(base + path)
             wait_ready(page)
             initial = snapshot(page)
-            assert initial['vertices'] == POINT_COUNT and initial['geometryCount'] == 1
+            assert initial['vertices'] == 453253 and initial['geometryCount'] == 1
             assert initial['size'] == 2 and not initial['attenuation']
             # r185 PLYLoader stores linear colors in normalized uint8 attributes.
-            for encoded, srgb in zip(initial['color'], FIRST_RGB):
+            for encoded, srgb in zip(initial['color'], [119, 18, 16]):
                 value = srgb / 255
                 linear = value / 12.92 if value <= .04045 else ((value + .055) / 1.055) ** 2.4
                 assert abs(encoded / 255 - linear) <= 1 / 255
@@ -191,7 +185,7 @@ def run():
             page.keyboard.press('ArrowLeft')
             assert page.locator('#tab-vggt').evaluate('(e) => e === document.activeElement')
             assert_close(snapshot(page)['position'], rotated['position'])
-            assert f'{POINT_COUNT:,}점' in page.locator('[data-viewer-status]').inner_text()
+            assert '453,253점' in page.locator('[data-viewer-status]').inner_text()
             page.keyboard.press('End')
             assert page.locator('#tab-hdf').get_attribute('aria-selected') == 'true'
             page.keyboard.press('Home')
@@ -246,7 +240,7 @@ def run():
         assert snapshot(page)['draws'] == 0
         page.locator('#tab-vggt').click()
         wait_ready(page)
-        assert f'{POINT_COUNT:,}점' in page.locator('[data-viewer-status]').inner_text()
+        assert '453,253점' in page.locator('[data-viewer-status]').inner_text()
         context.close()
         results.append({'loading_switch':'passed'})
 
