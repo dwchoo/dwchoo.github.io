@@ -10,6 +10,16 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "docs/verification"
+METADATA = json.loads((ROOT / "assets/js/reconstruction-data.js").read_text().split(" = ", 1)[1].rstrip(";\n"))
+POINT_COUNT = METADATA["point_count"]
+with (ROOT / "assets/data/vggt/reconstruction.ply").open("rb") as ply:
+    while True:
+        line = ply.readline()
+        if line == b"end_header\n":
+            break
+        if not line:
+            raise ValueError("Missing PLY header")
+    FIRST_RGB = tuple(ply.read(15)[12:15])
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -120,18 +130,18 @@ def run():
             page.on('response', lambda r: errors.append(f"HTTP {r.status}: {r.url}") if r.status >= 400 else None)
             requests = []
             page.on('request', lambda r: requests.append(r.url))
-            page.route('**/assets/js/pointcloud-viewer.js', instrument)
+            page.route('**/assets/js/pointcloud-viewer.js*', instrument)
             page.goto(base + path)
             wait_ready(page)
             initial = snapshot(page)
-            assert initial['vertices'] == 453253 and initial['geometryCount'] == 1
+            assert initial['vertices'] == POINT_COUNT and initial['geometryCount'] == 1
             assert initial['size'] == 2 and not initial['attenuation']
             # r185 PLYLoader stores linear colors in normalized uint8 attributes.
-            for encoded, srgb in zip(initial['color'], [119, 18, 16]):
+            for encoded, srgb in zip(initial['color'], FIRST_RGB):
                 value = srgb / 255
                 linear = value / 12.92 if value <= .04045 else ((value + .055) / 1.055) ** 2.4
                 assert abs(encoded / 255 - linear) <= 1 / 255
-            assert_close(initial['direction'], [3.2047461e-5, -5.3081767e-6, -1], 1e-8)
+            assert_close(initial['direction'], [-v for v in METADATA['initial_camera']['forward']], 1e-8)
             assert initial['ratio'] == (2 if mobile else 1)
             first_ms = page.evaluate('window.__firstDraw')
             assert page.locator('#tab-vggt').get_attribute('aria-selected') == 'true'
@@ -185,7 +195,7 @@ def run():
             page.keyboard.press('ArrowLeft')
             assert page.locator('#tab-vggt').evaluate('(e) => e === document.activeElement')
             assert_close(snapshot(page)['position'], rotated['position'])
-            assert '453,253점' in page.locator('[data-viewer-status]').inner_text()
+            assert f'{POINT_COUNT:,}점' in page.locator('[data-viewer-status]').inner_text()
             page.keyboard.press('End')
             assert page.locator('#tab-hdf').get_attribute('aria-selected') == 'true'
             page.keyboard.press('Home')
@@ -214,7 +224,7 @@ def run():
             page.locator('[data-pointcloud-viewer]').scroll_into_view_if_needed()
             settle(page)
             assert snapshot(page)['draws'] > hidden['draws']
-            assert len([r for r in requests if r.endswith('pointcloud.ply')]) == 1
+            assert len([r for r in requests if r.endswith('reconstruction.ply')]) == 1
             assert page.locator('canvas').count() == 1
             page.evaluate("document.querySelector('[data-pointcloud-viewer]').remove()")
             settle(page)
@@ -227,20 +237,20 @@ def run():
         context = browser.new_context(viewport={'width':1440,'height':1100})
         page = context.new_page()
         page.on('pageerror', lambda e: errors.append(str(e)))
-        page.route('**/assets/js/pointcloud-viewer.js', instrument)
+        page.route('**/assets/js/pointcloud-viewer.js*', instrument)
         pending = []
-        page.route('**/pointcloud.ply', lambda route: pending.append(route))
+        page.route('**/reconstruction.ply', lambda route: pending.append(route))
         page.goto(base)
         page.wait_for_function("document.querySelector('canvas') !== null")
         page.locator('#tab-hdf').click()
         page.locator('[data-lang-button="kr"]').click()
         assert pending
-        pending.pop().fulfill(path=str(ROOT / 'assets/data/vggt/pointcloud.ply'))
+        pending.pop().fulfill(path=str(ROOT / 'assets/data/vggt/reconstruction.ply'))
         page.wait_for_function("window.__qa().state === 'ready'")
         assert snapshot(page)['draws'] == 0
         page.locator('#tab-vggt').click()
         wait_ready(page)
-        assert '453,253점' in page.locator('[data-viewer-status]').inner_text()
+        assert f'{POINT_COUNT:,}점' in page.locator('[data-viewer-status]').inner_text()
         context.close()
         results.append({'loading_switch':'passed'})
 
@@ -248,16 +258,16 @@ def run():
         context = browser.new_context()
         page = context.new_page()
         page.on('pageerror', lambda e: errors.append(str(e)))
-        page.route('**/assets/js/pointcloud-viewer.js', instrument)
+        page.route('**/assets/js/pointcloud-viewer.js*', instrument)
         pending = []
-        page.route('**/pointcloud.ply', lambda route: pending.append(route))
+        page.route('**/reconstruction.ply', lambda route: pending.append(route))
         page.goto(base)
         page.wait_for_function("window.__qa !== undefined")
         page.evaluate("document.querySelector('[data-pointcloud-viewer]').remove()")
         settle(page)
         assert page.evaluate('window.__qa().disposed')
         for route in pending:
-            route.fulfill(path=str(ROOT / 'assets/data/vggt/pointcloud.ply'))
+            route.fulfill(path=str(ROOT / 'assets/data/vggt/reconstruction.ply'))
         settle(page)
         assert page.locator('canvas').count() == 0
         context.close()
@@ -268,11 +278,11 @@ def run():
             page = context.new_page()
             page.on('pageerror', lambda e: errors.append(str(e)))
             if failure == '404':
-                page.route('**/pointcloud.ply', lambda route: route.fulfill(status=404,body='missing'))
+                page.route('**/reconstruction.ply', lambda route: route.fulfill(status=404,body='missing'))
             elif failure == 'corrupt':
-                corrupt = bytearray((ROOT / 'assets/data/vggt/pointcloud.ply').read_bytes())
+                corrupt = bytearray((ROOT / 'assets/data/vggt/reconstruction.ply').read_bytes())
                 corrupt[-1] ^= 1
-                page.route('**/pointcloud.ply', lambda route: route.fulfill(body=bytes(corrupt)))
+                page.route('**/reconstruction.ply', lambda route: route.fulfill(body=bytes(corrupt)))
             elif failure == 'module':
                 page.route('**/vendor/three/PLYLoader.js', lambda route: route.fulfill(status=404,body='missing'))
             elif failure == 'webgl':

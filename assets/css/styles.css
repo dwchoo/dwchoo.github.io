@@ -770,3 +770,52 @@ body[data-lang="kr"] .timeline.lang-panel[data-lang-panel="kr"] {
   bottom: auto;
   transform: translateY(-50%);
 }
+
+.viewer-progress {
+  position: absolute;
+  top: calc(50% + 26px);
+  left: 50%;
+  width: min(320px, calc(100% - 48px));
+  transform: translateX(-50%);
+  color: #d0d9da;
+  text-align: center;
+  pointer-events: none;
+}
+
+.viewer-progress progress {
+  display: block;
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 4px;
+  background: #30383a;
+  accent-color: #87c8c3;
+  appearance: none;
+}
+
+.viewer-progress progress::-webkit-progress-bar {
+  background: #30383a;
+}
+
+.viewer-progress progress::-webkit-progress-value {
+  background: #87c8c3;
+}
+
+.viewer-progress progress::-moz-progress-bar {
+  background: #87c8c3;
+}
+
+.viewer-progress p {
+  margin: 10px 0 0;
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.viewer-caption,
+.project-item .project-note {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}

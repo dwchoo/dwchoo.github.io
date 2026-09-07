@@ -50,6 +50,8 @@ AI Development Team Lead / Senior Researcher
 
 [VGGT-ISAAC-SIM](https://github.com/dwchoo/vggt-isaac-sim): Developed a pipeline for VGGT-based multi-view 3D reconstruction, OpenUSD export, and visualization in Isaac Sim.
 
+Demo source: the [official VGGT Kitchen example](https://github.com/facebookresearch/vggt/tree/main/examples/kitchen). The 25 source images were duplicated to form a 50-image validation run; the viewer shows the final 500,000-point result.
+
 ### HVR-SSLE
 
 [HVR-SSLE](https://github.com/dwchoo/HVR-SSLE) is the official PyTorch implementation of the HVR-SSLE paper, which proposes a compact self-supervised low-light image enhancement model. The repository includes training and inference pipelines, dataset configuration, checkpoint handling, and analysis resources for reproducible research.
@@ -64,3 +66,12 @@ Contributed to GoCV, a Go package for computer vision using OpenCV. This reflect
 - Programming: Python, Go
 - Deep Learning: PyTorch, TensorFlow, TensorRT, model training, inference pipelines, experiment analysis
 - Vision Systems: OpenCV, GoCV, NVIDIA Triton, Jetson, DeepStream, RTSP streaming, image restoration workflows
+
+<!-- 3D viewer UI copy (implementation reference)
+Loading 3D reconstruction…
+Downloading 3D data…
+Preparing the 3D view…
+Download complete
+Download progress: {percent}% · {received} / {total} MB
+{count} points · Drag to rotate
+-->

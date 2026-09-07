@@ -1,43 +1,53 @@
-# VGGT point cloud 게시 데이터 기록
+# VGGT Kitchen 게시 데이터 기록
 
-## 선택한 입력
+## 선택한 최종 결과
 
-- Run: `76792ce3d6414c049bedae5152fe084e`
-- 입력: `/home/dwchoo/omniverse/isaac_sim/sim_data/local_data/vggt_web/jobs/766e4f73b8cf47f98d3f5c62d128b42d/runs/76792ce3d6414c049bedae5152fe084e/pointcloud.npz`
-- `run_summary.json`: `status=complete`, `point_counts.exported=453253`
-- 기존 정리 조건: confidence percentile 90, 기록된 threshold `17.639276885986327`
-- `transforms.json`: `world_from_vggt=identity`
-- 입력 SHA-256: `92034ad03849352780485f2710a0dc810bf87131b277d170f26cc34d841c8c9b`
+- Job: `479b8f0c6112472ebd8eb75062d83e2b`
+- Run: `4d342425366e4788ae571c034487f0c2`
+- 입력: `/home/dwchoo/omniverse/isaac_sim/sim_data/local_data/vggt_web/jobs/479b8f0c6112472ebd8eb75062d83e2b/runs/4d342425366e4788ae571c034487f0c2/pointcloud.npz`
+- 완료 상태: `status=complete`, 기록된 exported 점 수 `500000`
+- 웹앱에서 적용한 조건: confidence percentile 50, threshold `12.92031192779541`, point cap `500000`
+- 좌표: `world_from_vggt=identity`, scale은 상대값
+- NPZ SHA-256: `a0b6747acdfdf9400ca9ecdcf083856f4ba131ef5c941ee159b97e5acb61f790`
 
-이 정리본을 그대로 사용했습니다. 필터링, 점 감소, 좌표 변환, 메시 생성은 수행하지 않았습니다. 기존 VGGT/Isaac Sim 프로젝트와 원본 run의 파일은 수정하지 않았습니다.
+사용자가 선택한 최종 NPZ를 그대로 변환했습니다. 추가 필터링, 점 감소, 점 복제, 재추론, 메시 생성은 수행하지 않았습니다. 원본 run은 수정하지 않았습니다.
 
-## 변환 결과
+## 출처
 
-- 출력: [`assets/data/vggt/pointcloud.ply`](../assets/data/vggt/pointcloud.ply)
-- 형식: binary little-endian PLY, 점당 15바이트(float32 XYZ + uint8 RGB)
-- 점 수: **453,253**
-- 파일 크기: **6,798,975바이트** (헤더 180바이트 + 점 데이터 6,798,795바이트)
-- 출력 SHA-256: `a4c466a60928afd1df8d06219dd050561c70a204778b48071758b31850fe537a`
-- 부가 정보: [`pointcloud.json`](../assets/data/vggt/pointcloud.json)
-- 변환 환경: Python 3.12 가상환경, NumPy 2.5.3
+[facebookresearch/vggt의 공식 Kitchen 예제](https://github.com/facebookresearch/vggt/tree/main/examples/kitchen)를 사용한 검증 결과입니다. 공식 `examples/kitchen/images` 디렉터리에 이미지 25장이 있는 것을 확인했습니다. 입력 manifest의 50개 항목은 원본 사진 SHA-256 기준으로 25종이며, 각각 정확히 두 번씩 나타납니다.
 
-실행 명령:
+따라서 원본 사진 25장을 복제해 입력 50장으로 실행한 결과입니다. 원본 장면의 독립적인 촬영이나 서로 다른 50개 시점의 수집을 수행했다는 의미가 아닙니다. 홈페이지 영문·한글의 결과 캡션과 프로젝트 설명에도 이 출처를 명시했습니다.
+
+## 변환 및 게시 파일
+
+- 데이터: [`reconstruction.ply`](../assets/data/vggt/reconstruction.ply)
+- 형식: binary little-endian, float32 XYZ + uint8 RGB, 점당 15바이트
+- 점 수: **500,000**
+- 파일 크기: **7,500,180바이트** (헤더 180 + 점 데이터 7,500,000)
+- PLY SHA-256: `101d4de72c5bec2247e6628c1bf6acc7574d6069af99b09d818ce4b357ff540a`
+- 뷰어 설정: [`reconstruction-data.js`](../assets/js/reconstruction-data.js)에 파일 크기·해시·점 수·첫 카메라 방향 기록
+- 환경: Python 3.12 가상환경, NumPy 2.5.3
 
 ```sh
 /tmp/homepage-viewer-venv/bin/python scripts/export_pointcloud.py \
-  --source-run /home/dwchoo/omniverse/isaac_sim/sim_data/local_data/vggt_web/jobs/766e4f73b8cf47f98d3f5c62d128b42d/runs/76792ce3d6414c049bedae5152fe084e \
-  --output assets/data/vggt/pointcloud.ply
+  --source-run /home/dwchoo/omniverse/isaac_sim/sim_data/local_data/vggt_web/jobs/479b8f0c6112472ebd8eb75062d83e2b/runs/4d342425366e4788ae571c034487f0c2 \
+  --output assets/data/vggt/reconstruction.ply \
+  --metadata-output assets/js/reconstruction-data.js
 ```
 
-변환 스크립트의 왕복 검사와 별도 `numpy.frombuffer` 검사에서 모든 XYZ·RGB의 바이트와 점 순서가 일치했습니다. 변환 후 입력의 SHA-256도 동일했습니다. 유효하지 않은 입력을 거부하는 테스트를 포함해 11개 변환 테스트를 통과했습니다.
+`assets/data/vggt/`에는 `reconstruction.ply`만 있습니다. 원본 사진, `pointcloud.npz`, 약 244 MB의 `predictions.npz`, USD 파일은 홈페이지 저장소에 복사하지 않았습니다. 변환에는 최종 NPZ와 run 상태·좌표 정보만 사용했습니다.
 
-## 초기 카메라와 색상
+변환기의 왕복 검사와 별도 `numpy.frombuffer` 검사에서 500,000행 전체 XYZ·RGB의 바이트와 순서가 원본과 일치했습니다. 원본 NPZ 해시도 변환 전후 동일했습니다. 입력 오류와 JS 설정 출력 보호를 포함해 13개 변환 테스트를 통과했습니다.
 
-`camera_to_world_cv[0]`의 첫 입력 카메라 방향을 사용합니다. CV 좌표의 +Y는 아래, +Z는 전방이므로 `up=-R[:,1]`, `forward=R[:,2]`로 설정했습니다. 초기 forward는 대략 `[-0.0000320475, 0.00000530818, 1]`, up은 `[-0.00000412105, -1, 0.00000530804]`입니다.
+## 카메라·색상·로딩
 
-전체 결과를 담기 위해 바운딩 박스 중심을 회전 중심으로 사용하고 바운딩 구와 가로·세로 시야각으로 거리를 계산합니다. 첫 카메라의 **방향**을 유지하면서 중심과 거리를 맞추므로 원본 사진의 위치·화각과 완전히 같은 투영은 아닙니다. 좌표 자체는 보존하며 크기 변경 시 현재 회전 방향을 유지합니다.
+첫 입력의 `camera_to_world_cv[0]`에서 `up=-R[:,1]`, `forward=R[:,2]`를 사용합니다. Forward는 대략 `[-0.0000237725, 0.00000324199, 1]`, up은 `[0.0000357564, -1, 0.00000324284]`입니다. 원본 좌표를 회전시키지 않고 카메라 방향만 맞췄습니다.
 
-배경 `#101315`, 점 크기 2 CSS px, `sizeAttenuation=false`, FOV 45°, pixel ratio 최대 2입니다. [Three.js r185 PLYLoader](https://github.com/mrdoob/three.js/blob/r185/examples/jsm/loaders/PLYLoader.js)가 sRGB RGB를 linear 색상으로 변환하며, renderer의 출력은 sRGB입니다. 별도의 중복 색상 변환은 없습니다. r185 loader의 normalized uint8 색상 attribute에 따른 양자화는 적용되지만, 게시 PLY의 RGB 원본 바이트는 그대로입니다.
+바운딩 박스 중심을 회전 중심으로 두고 바운딩 구와 시야각으로 전체 결과를 담는 거리를 계산합니다. FOV 45°, 배경 `#101315`, 점 크기 2 CSS px, `sizeAttenuation=false`, pixel ratio 최대 2입니다. 크기 변경 시 현재 회전 방향을 유지합니다.
+
+[PLYLoader r185](https://github.com/mrdoob/three.js/blob/r185/examples/jsm/loaders/PLYLoader.js)가 sRGB 색상을 linear로 한 번 변환하고 renderer가 sRGB로 출력합니다. Loader의 normalized uint8 색상 attribute에 따른 양자화는 있지만 PLY의 RGB 바이트는 원본 그대로입니다.
+
+로딩 UI는 실제 다운로드 바이트로 진행률을 표시하고, 다운로드 후 3D 준비 단계를 별도로 안내합니다. gzip 응답에서는 압축된 Content-Length 대신 원래 PLY 크기를 기준으로 계산합니다. 파일은 한 번만 요청하며, 파싱 결과를 탭·언어 전환에 재사용합니다.
 
 ## Three.js 배포 파일
 

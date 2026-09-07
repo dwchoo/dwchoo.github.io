@@ -18,7 +18,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css?v=kitchen-500k-1">
   </head>
   <body data-lang="en">
     <header class="site-header">
@@ -90,8 +90,14 @@
         </div>
         <div id="panel-vggt" role="tabpanel" aria-labelledby="tab-vggt" tabindex="0">
           <div class="pointcloud-viewer" data-pointcloud-viewer aria-busy="true">
-            <p class="viewer-status" role="status" aria-live="polite" data-i18n-en="Loading 3D reconstruction…" data-i18n-kr="3D 재구성을 불러오는 중…" data-viewer-status>Loading 3D reconstruction…</p>
+            <p id="viewer-status" class="viewer-status" role="status" aria-live="polite" data-i18n-en="Loading 3D reconstruction…" data-i18n-kr="3D 재구성을 불러오는 중…" data-viewer-status>Loading 3D reconstruction…</p>
+            <div class="viewer-progress" data-viewer-progress>
+              <progress max="100" aria-labelledby="viewer-status" data-viewer-progress-bar></progress>
+              <p aria-hidden="true" data-viewer-progress-text></p>
+            </div>
           </div>
+          <p class="viewer-caption lang-panel" data-lang-panel="en">Validation using the <a href="https://github.com/facebookresearch/vggt/tree/main/examples/kitchen" target="_blank" rel="noreferrer">official VGGT Kitchen example</a>: 25 source images duplicated to 50 inputs. Final result: 500,000 points.</p>
+          <p class="viewer-caption lang-panel" data-lang-panel="kr"><a href="https://github.com/facebookresearch/vggt/tree/main/examples/kitchen" target="_blank" rel="noreferrer">공식 VGGT Kitchen 예제</a> 사진 25장을 각각 두 번 사용한 입력 50장으로 검증한 결과입니다. 최종 500,000점을 표시합니다.</p>
         </div>
         <div id="panel-hdf" role="tabpanel" aria-labelledby="tab-hdf" tabindex="0" hidden>
           <div class="comparison-shell">
@@ -328,11 +334,13 @@
             <div class="project-kicker">3D Vision / OpenUSD / Isaac Sim</div>
             <h3><a href="https://github.com/dwchoo/vggt-isaac-sim" target="_blank" rel="noreferrer">VGGT-ISAAC-SIM</a></h3>
             <p>Developed a pipeline for VGGT-based multi-view 3D reconstruction, OpenUSD export, and visualization in Isaac Sim.</p>
+            <p class="project-note">Demo: the <a href="https://github.com/facebookresearch/vggt/tree/main/examples/kitchen" target="_blank" rel="noreferrer">official VGGT Kitchen example</a>, with 25 source images duplicated to 50 inputs for validation; 500,000 points shown.</p>
           </article>
           <article class="project-item lang-panel" data-lang-panel="kr">
             <div class="project-kicker">3D Vision / OpenUSD / Isaac Sim</div>
             <h3><a href="https://github.com/dwchoo/vggt-isaac-sim" target="_blank" rel="noreferrer">VGGT-ISAAC-SIM</a></h3>
             <p>VGGT 기반 다중 시점 3D 재구성, OpenUSD 내보내기 및 Isaac Sim 시각화 파이프라인 개발</p>
+            <p class="project-note">데모: <a href="https://github.com/facebookresearch/vggt/tree/main/examples/kitchen" target="_blank" rel="noreferrer">공식 VGGT Kitchen 예제</a> 사진 25장을 각각 두 번 사용한 입력 50장으로 검증 수행. 최종 500,000점 결과를 표시함</p>
           </article>
           <article class="project-item lang-panel" data-lang-panel="en">
             <div class="project-kicker">PyTorch / Low-Light Enhancement</div>
@@ -416,6 +424,6 @@
       </span>
     </footer>
 
-    <script src="assets/js/site.js"></script>
+    <script src="assets/js/site.js?v=kitchen-500k-1"></script>
   </body>
 </html>

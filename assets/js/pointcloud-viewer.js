@@ -1,20 +1,26 @@
 import * as THREE from "../vendor/three/three.module.min.js";
 import { PLYLoader } from "../vendor/three/PLYLoader.js";
 import { OrbitControls } from "../vendor/three/OrbitControls.js";
+import { reconstruction as manifest } from "./reconstruction-data.js?v=kitchen-500k-1";
 
-const assetURL = new URL("../data/vggt/pointcloud.ply", import.meta.url);
-const manifestURL = new URL("../data/vggt/pointcloud.json", import.meta.url);
+const assetURL = new URL("../data/vggt/reconstruction.ply", import.meta.url);
 const messages = {
   en: {
     loading: "Loading 3D reconstruction…",
-    ready: "453,253 points · Drag to rotate",
+    downloading: "Downloading 3D data…",
+    preparing: "Preparing the 3D view…",
+    downloaded: "Download complete",
+    ready: "{count} points · Drag to rotate",
     file: "The 3D data could not be loaded. Please reload the page.",
     webgl: "3D graphics are unavailable. Please use a browser with WebGL enabled and reload.",
     canvas: "VGGT 3D reconstruction. Drag with the left mouse button or one finger to rotate.",
   },
   kr: {
     loading: "3D 재구성을 불러오는 중…",
-    ready: "453,253점 · 드래그하여 회전",
+    downloading: "3D 데이터를 다운로드하는 중…",
+    preparing: "3D 화면을 준비하는 중…",
+    downloaded: "다운로드 완료",
+    ready: "{count}점 · 드래그하여 회전",
     file: "3D 데이터를 불러올 수 없습니다. 페이지를 새로고침해 주세요.",
     webgl: "3D 그래픽을 사용할 수 없습니다. WebGL이 활성화된 브라우저에서 새로고침해 주세요.",
     canvas: "VGGT 3D 재구성. 왼쪽 마우스 버튼 또는 한 손가락으로 드래그하여 회전합니다.",
@@ -23,6 +29,9 @@ const messages = {
 
 export function createPointcloudViewer(host, { language = "en", active = true } = {}) {
   const status = host.querySelector("[data-viewer-status]");
+  const progress = host.querySelector("[data-viewer-progress]");
+  const progressBar = host.querySelector("[data-viewer-progress-bar]");
+  const progressText = host.querySelector("[data-viewer-progress-text]");
   const request = new AbortController();
   let state = "loading";
   let disposed = false;
@@ -33,13 +42,86 @@ export function createPointcloudViewer(host, { language = "en", active = true } 
   let width = 0;
   let height = 0;
   let pixelRatio = 0;
+  let pointCount = 0;
+  let receivedBytes = 0;
+  let totalBytes = 0;
+  let lastPercent = -1;
+
+  function isLoading() {
+    return ["loading", "downloading", "preparing"].includes(state);
+  }
+
+  function updateProgress() {
+    if (disposed) return;
+    progress.hidden = !isLoading();
+    if (!totalBytes) {
+      progressBar.removeAttribute("value");
+      progressBar.removeAttribute("aria-valuetext");
+      progressText.textContent = "";
+      return;
+    }
+    const percent = Math.floor(receivedBytes / totalBytes * 100);
+    const amount = `${(receivedBytes / 1e6).toFixed(1)} / ${(totalBytes / 1e6).toFixed(1)} MB`;
+    progressBar.value = percent;
+    progressText.textContent = state === "preparing"
+      ? `${messages[language].downloaded} · ${amount}`
+      : `${percent}% · ${amount}`;
+    progressBar.setAttribute("aria-valuetext", progressText.textContent);
+    lastPercent = percent;
+  }
 
   function setLanguage(value) {
     language = value === "kr" ? "kr" : "en";
-    status.textContent = messages[language][state];
+    status.textContent = messages[language][state].replace("{count}", pointCount.toLocaleString("en-US"));
     host.dataset.viewerState = state;
-    host.setAttribute("aria-busy", String(state === "loading"));
+    host.setAttribute("aria-busy", String(isLoading()));
     renderer?.domElement.setAttribute("aria-label", messages[language].canvas);
+    updateProgress();
+  }
+
+  async function download(response) {
+    state = "downloading";
+    setLanguage(language);
+    if (!response.body) {
+      const buffer = await response.arrayBuffer();
+      receivedBytes = buffer.byteLength;
+      return buffer;
+    }
+    const bytes = new Uint8Array(totalBytes);
+    const reader = response.body.getReader();
+    try {
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        if (disposed || request.signal.aborted) return null;
+        if (receivedBytes + value.byteLength > totalBytes) throw new Error("Unexpected data length");
+        bytes.set(value, receivedBytes);
+        receivedBytes += value.byteLength;
+        if (Math.floor(receivedBytes / totalBytes * 100) !== lastPercent) updateProgress();
+      }
+      if (receivedBytes !== totalBytes) throw new Error("Incomplete point cloud download");
+      return bytes.buffer;
+    } finally {
+      // Cancel an unfinished response on abort/error, then release its stream lock.
+      try { await reader.cancel(); } catch { /* Fetch may already have been aborted. */ }
+      reader.releaseLock();
+    }
+  }
+
+  function showPreparation() {
+    state = "preparing";
+    setLanguage(language);
+    // Allow the browser to paint this phase before synchronous PLY parsing.
+    return new Promise((resolve) => {
+      const finish = () => {
+        clearTimeout(timer);
+        request.signal.removeEventListener("abort", finish);
+        resolve();
+      };
+      const timer = setTimeout(finish, 32);
+      request.signal.addEventListener("abort", finish, { once: true });
+      if (request.signal.aborted) finish();
+    });
   }
 
   function canRender() {
@@ -165,22 +247,26 @@ export function createPointcloudViewer(host, { language = "en", active = true } 
     }
     setLanguage(language);
     try {
-      const [dataResponse, manifestResponse] = await Promise.all([
-        fetch(assetURL, { signal: request.signal }),
-        fetch(manifestURL, { signal: request.signal }),
-      ]);
-      if (!dataResponse.ok || !manifestResponse.ok) throw new Error("Asset request failed");
-      const [buffer, manifest] = await Promise.all([dataResponse.arrayBuffer(), manifestResponse.json()]);
-      if (disposed || state !== "loading") return;
-      if (buffer.byteLength !== manifest.byte_length || manifest.point_count !== 453253) {
-        throw new Error("Unexpected point cloud size");
+      if (disposed || !isLoading()) return;
+      if (!Number.isSafeInteger(manifest.byte_length) || manifest.byte_length <= 0 ||
+          !Number.isSafeInteger(manifest.point_count) || manifest.point_count <= 0) {
+        throw new Error("Invalid point cloud manifest");
       }
+      // Fetch streams decoded bytes; use the PLY size, not a compressed Content-Length.
+      totalBytes = manifest.byte_length;
+      const dataResponse = await fetch(assetURL, { signal: request.signal });
+      if (!dataResponse.ok) throw new Error("Asset request failed");
+      const buffer = await download(dataResponse);
+      if (disposed || !isLoading()) return;
+      if (buffer.byteLength !== totalBytes) throw new Error("Unexpected point cloud size");
+      await showPreparation();
+      if (disposed || !isLoading()) return;
       if (globalThis.crypto?.subtle) {
         const digest = await crypto.subtle.digest("SHA-256", buffer);
         const hash = Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
         if (hash !== manifest.ply_sha256) throw new Error("Point cloud checksum mismatch");
       }
-      if (disposed || state !== "loading") return;
+      if (disposed || !isLoading()) return;
       geometry = new PLYLoader().parse(buffer);
       const positions = geometry.getAttribute("position");
       const colors = geometry.getAttribute("color");
@@ -188,6 +274,7 @@ export function createPointcloudViewer(host, { language = "en", active = true } 
           !positions.array.every(Number.isFinite) || !colors.array.every(Number.isFinite)) {
         throw new Error("Invalid point cloud");
       }
+      pointCount = positions.count;
       geometry.computeBoundingBox();
       geometry.computeBoundingSphere();
       radius = geometry.boundingSphere.radius;
@@ -214,7 +301,7 @@ export function createPointcloudViewer(host, { language = "en", active = true } 
       setLanguage(language);
       syncActivity();
     } catch {
-      if (!disposed && state === "loading") fail("file");
+      if (!disposed && isLoading()) fail("file");
     }
   }
 

@@ -69,6 +69,7 @@
   let stopped = false;
   let currentTab = "tab-vggt";
   const viewerModuleURL = new URL("pointcloud-viewer.js", document.currentScript.src);
+  viewerModuleURL.search = new URL(document.currentScript.src).search;
   const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
 
   function showModuleError() {
@@ -76,6 +77,7 @@
     if (!host) return;
     host.dataset.viewerState = "module";
     host.setAttribute("aria-busy", "false");
+    host.querySelector("[data-viewer-progress]").hidden = true;
     host.querySelector("[data-viewer-status]").textContent = body.dataset.lang === "kr"
       ? "3D 뷰어를 시작할 수 없습니다. 페이지를 새로고침해 주세요."
       : "The 3D viewer could not start. Please reload the page.";

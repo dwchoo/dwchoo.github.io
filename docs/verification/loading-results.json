@@ -1,0 +1,92 @@
+{
+  "results": [
+    {
+      "mode": "plain",
+      "partial_percent": 50.0,
+      "decoded_bytes": 7500180,
+      "transfer_bytes": 7500180,
+      "result": "PASS",
+      "phases": [
+        {
+          "state": "loading",
+          "value": null
+        },
+        {
+          "state": "downloading",
+          "value": "0"
+        },
+        {
+          "state": "downloading",
+          "value": "50"
+        },
+        {
+          "state": "preparing",
+          "value": "100"
+        },
+        {
+          "state": "ready",
+          "value": "100"
+        }
+      ]
+    },
+    {
+      "mode": "gzip",
+      "partial_percent": 49.0,
+      "decoded_bytes": 7500180,
+      "transfer_bytes": 6978915,
+      "result": "PASS",
+      "phases": [
+        {
+          "state": "loading",
+          "value": null
+        },
+        {
+          "state": "downloading",
+          "value": "0"
+        },
+        {
+          "state": "downloading",
+          "value": "49"
+        },
+        {
+          "state": "preparing",
+          "value": "100"
+        },
+        {
+          "state": "ready",
+          "value": "100"
+        }
+      ]
+    },
+    {
+      "mode": "truncated",
+      "partial_percent": 49.0,
+      "decoded_bytes": 7500180,
+      "transfer_bytes": 7499156,
+      "result": "PASS",
+      "phases": [
+        {
+          "state": "loading",
+          "value": null
+        },
+        {
+          "state": "downloading",
+          "value": "0"
+        },
+        {
+          "state": "downloading",
+          "value": "49"
+        },
+        {
+          "state": "file",
+          "value": "99"
+        }
+      ]
+    },
+    {
+      "mode": "abort",
+      "result": "PASS"
+    }
+  ],
+  "unhandled_errors": []
+}

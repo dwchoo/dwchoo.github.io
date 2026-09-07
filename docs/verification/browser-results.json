@@ -5,39 +5,39 @@
     {
       "path": "/",
       "mobile": false,
-      "first_display_ms": 536.1,
+      "first_display_ms": 641.9,
       "initial": {
         "state": "ready",
         "disposed": false,
         "draws": 1,
         "position": [
-          0.0015656628305146113,
-          -0.021373421433334247,
-          -0.7070743655616003
+          0.16606868902158436,
+          -0.015939337379424667,
+          -1.2042573884296268
         ],
         "target": [
-          0.0015135258436203003,
-          -0.021364785730838772,
-          0.919793576002121
+          0.16601702570915222,
+          -0.015932291746139526,
+          0.9689841270446777
         ],
-        "distance": 1.6268679424220702,
+        "distance": 2.1732415160998078,
         "direction": [
-          3.204746097380824e-05,
-          -5.308176693566228e-06,
-          -0.9999999994723917
+          2.3772467095539502e-05,
+          -3.241992771141545e-06,
+          -0.9999999997121796
         ],
-        "vertices": 453253,
+        "vertices": 500000,
         "color": [
-          47,
-          2,
+          32,
+          1,
           1
         ],
         "ratio": 1,
         "geometryCount": 1,
         "size": 2,
         "attenuation": false,
-        "near": 0.9351174888545044,
-        "far": 2.3186183959896356,
+        "near": 1.249170935278266,
+        "far": 3.0973120969213435,
         "enabled": true
       },
       "checks": "rotation, fixed distance/target, disabled zoom/pan, tabs, keyboard, languages, all HDF samples, resize, idle/inactive/offscreen/hidden, one fetch/canvas, removal cleanup"
@@ -45,39 +45,39 @@
     {
       "path": "/preview/",
       "mobile": true,
-      "first_display_ms": 552,
+      "first_display_ms": 813.9,
       "initial": {
         "state": "ready",
         "disposed": false,
         "draws": 1,
         "position": [
-          0.0015656628305146113,
-          -0.021373421433334247,
-          -0.7070743655616003
+          0.16606868902158436,
+          -0.015939337379424667,
+          -1.2042573884296268
         ],
         "target": [
-          0.0015135258436203003,
-          -0.021364785730838772,
-          0.919793576002121
+          0.16601702570915222,
+          -0.015932291746139526,
+          0.9689841270446777
         ],
-        "distance": 1.6268679424220702,
+        "distance": 2.1732415160998078,
         "direction": [
-          3.204746097380824e-05,
-          -5.308176693566228e-06,
-          -0.9999999994723917
+          2.3772467095539502e-05,
+          -3.241992771141545e-06,
+          -0.9999999997121796
         ],
-        "vertices": 453253,
+        "vertices": 500000,
         "color": [
-          47,
-          2,
+          32,
+          1,
           1
         ],
         "ratio": 2,
         "geometryCount": 1,
         "size": 2,
         "attenuation": false,
-        "near": 0.9351174888545044,
-        "far": 2.3186183959896356,
+        "near": 1.249170935278266,
+        "far": 3.0973120969213435,
         "enabled": true
       },
       "checks": "rotation, fixed distance/target, disabled zoom/pan, tabs, keyboard, languages, all HDF samples, resize, idle/inactive/offscreen/hidden, one fetch/canvas, removal cleanup"

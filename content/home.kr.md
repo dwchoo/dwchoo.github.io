@@ -50,6 +50,8 @@ AI 개발 팀장 / 책임 연구원
 
 [VGGT-ISAAC-SIM](https://github.com/dwchoo/vggt-isaac-sim): VGGT 기반 다중 시점 3D 재구성, OpenUSD 내보내기 및 Isaac Sim 시각화 파이프라인 개발
 
+데모 출처: [공식 VGGT Kitchen 예제](https://github.com/facebookresearch/vggt/tree/main/examples/kitchen). 원본 사진 25장을 각각 두 번 사용한 입력 50장으로 검증 수행. 뷰어에는 최종 500,000점 결과를 표시함.
+
 ### HVR-SSLE
 
 [HVR-SSLE](https://github.com/dwchoo/HVR-SSLE): compact self-supervised low-light image enhancement 모델을 제안한 HVR-SSLE 논문의 official PyTorch implementation을 공개함. Training/inference pipeline, dataset configuration, checkpoint handling, analysis resource를 포함해 연구 재현성을 고려함
@@ -64,3 +66,12 @@ OpenCV 기반 Go computer vision library인 GoCV에 기여함. Computer vision �
 - Programming: Python, Go
 - Deep Learning: PyTorch, TensorFlow, TensorRT, model training, inference pipelines, experiment analysis
 - Vision Systems: OpenCV, GoCV, NVIDIA Triton, Jetson, DeepStream, RTSP streaming, image restoration workflows
+
+<!-- 3D 뷰어 UI 원고 (구현 참고)
+3D 재구성을 불러오는 중…
+3D 데이터를 다운로드하는 중…
+3D 화면을 준비하는 중…
+다운로드 완료
+다운로드 진행률: {percent}% · {received} / {total} MB
+{count}점 · 드래그하여 회전
+-->

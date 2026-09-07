@@ -90,6 +90,18 @@ class ExportTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             export(self.source, self.source / "pointcloud.ply")
 
+    def test_js_metadata_without_json_sidecar(self):
+        metadata_output = self.root / "web/reconstruction-data.js"
+        manifest = export(self.source, self.output, metadata_output)
+        encoded = metadata_output.read_text().split(" = ", 1)[1].rstrip(";\n")
+        self.assertEqual(json.loads(encoded), manifest)
+        self.assertFalse(self.output.with_suffix(".json").exists())
+
+    def test_metadata_cannot_overwrite_source(self):
+        with self.assertRaises(ValueError):
+            export(self.source, self.output, self.source / "run_summary.json")
+        self.assertFalse(self.output.exists())
+
 
 if __name__ == "__main__":
     unittest.main()
