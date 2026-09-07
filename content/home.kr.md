@@ -27,7 +27,13 @@ Image Restoration · Self-Supervised Learning · 3D Reconstruction · Digital Tw
 
 ### 3D Reconstruction — VGGT-ISAAC-SIM
 
-<!-- 배치: 3D 데모와 출처 캡션 아래에 프로젝트 설명을 표시함. -->
+<!-- 배치: 3D 데모, 입력 사진 썸네일 6장, 출처 캡션 아래에 프로젝트 설명을 표시함. -->
+
+입력 사진 · 25장 중 6장
+
+VGGT는 같은 장면을 여러 시점에서 촬영한 사진으로 3D 구조를 추정하는 모델임.
+
+<!-- 썸네일: 공식 Kitchen 예제의 00.png, 04.png, 09.png, 14.png, 19.png, 24.png. -->
 
 데모 출처: [공식 VGGT Kitchen 예제](https://github.com/facebookresearch/vggt/tree/main/examples/kitchen). 원본 사진 25장을 각각 두 번 사용한 입력 50장으로 검증 수행. 뷰어에는 최종 500,000점 결과를 표시함.
 

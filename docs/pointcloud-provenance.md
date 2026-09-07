@@ -20,6 +20,14 @@
 
 ## 변환 및 게시 파일
 
+### 입력 사진 썸네일
+
+3D 결과와 다중 시점 사진의 관계를 보여주기 위해 공식 Kitchen 입력 사진 25장 중 `00.png`, `04.png`, `09.png`, `14.png`, `19.png`, `24.png`를 [`assets/img/research/vggt-kitchen/`](../assets/img/research/vggt-kitchen/)에 추가했습니다. 사용자가 제공한 로컬 폴더의 파일을 그대로 복사하며, 픽셀·색상·구도를 수정하지 않습니다. 브라우저에서 원래 비율을 유지한 작은 썸네일로 표시합니다.
+
+폴더의 `source.json`에 기록된 출처는 `facebookresearch/vggt`, commit `a288dd0f14786c93483e45524328726ab7b1b4ce`, `examples/kitchen/images`입니다. 페이지에는 원본 25장 중 6장만 표시한다는 문구와 공식 예제 링크를 함께 제공합니다.
+
+### 3D 데이터
+
 - 데이터: [`reconstruction.ply`](../assets/data/vggt/reconstruction.ply)
 - 형식: binary little-endian, float32 XYZ + uint8 RGB, 점당 15바이트
 - 점 수: **500,000**
@@ -35,7 +43,7 @@
   --metadata-output assets/js/reconstruction-data.js
 ```
 
-`assets/data/vggt/`에는 `reconstruction.ply`만 있습니다. 원본 사진, `pointcloud.npz`, 약 244 MB의 `predictions.npz`, USD 파일은 홈페이지 저장소에 복사하지 않았습니다. 변환에는 최종 NPZ와 run 상태·좌표 정보만 사용했습니다.
+`assets/data/vggt/`에는 `reconstruction.ply`만 있습니다. `pointcloud.npz`, 약 244 MB의 `predictions.npz`, USD 파일은 홈페이지 저장소에 복사하지 않았습니다. 입력 예시 사진 6장은 위의 이미지 디렉터리에 별도로 보관합니다. PLY 변환에는 최종 NPZ와 run 상태·좌표 정보만 사용했습니다.
 
 변환기의 왕복 검사와 별도 `numpy.frombuffer` 검사에서 500,000행 전체 XYZ·RGB의 바이트와 순서가 원본과 일치했습니다. 원본 NPZ 해시도 변환 전후 동일했습니다. 입력 오류와 JS 설정 출력 보호를 포함해 13개 변환 테스트를 통과했습니다.
 

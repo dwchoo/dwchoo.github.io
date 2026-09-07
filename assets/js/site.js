@@ -158,6 +158,9 @@
     document.querySelectorAll("[data-i18n-aria-en]").forEach((node) => {
       node.setAttribute("aria-label", language === "kr" ? node.dataset.i18nAriaKr : node.dataset.i18nAriaEn);
     });
+    document.querySelectorAll("[data-i18n-alt-en]").forEach((node) => {
+      node.alt = language === "kr" ? node.dataset.i18nAltKr : node.dataset.i18nAltEn;
+    });
     viewer?.setLanguage(language);
     if (viewerImportFailed) showModuleError();
   }

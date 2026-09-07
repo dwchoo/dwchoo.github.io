@@ -27,7 +27,13 @@ Related project: VGGT-ISAAC-SIM
 
 ### 3D Reconstruction — VGGT-ISAAC-SIM
 
-<!-- Layout: show the 3D demo and its source caption before the project description. -->
+<!-- Layout: show the 3D demo, six input-photo thumbnails, and the source caption before the project description. -->
+
+Input photos · 6 of 25 views
+
+VGGT estimates a scene's 3D structure from photos taken from multiple viewpoints.
+
+<!-- Thumbnails: official Kitchen images 00.png, 04.png, 09.png, 14.png, 19.png, and 24.png. -->
 
 Demo source: the [official VGGT Kitchen example](https://github.com/facebookresearch/vggt/tree/main/examples/kitchen). The 25 source images were duplicated to form a 50-image validation run; the viewer shows the final 500,000-point result.
 

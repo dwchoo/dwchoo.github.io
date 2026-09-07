@@ -8,12 +8,13 @@
 
 - `index.html`: 영문/한글 토글을 포함한 메인 홈페이지
 - `assets/css/styles.css`: 홈페이지 전용 스타일
-- `assets/js/site.js`: 언어 전환, 결과 탭, HDF-EC 샘플·비교 위치 관리
+- `assets/js/site.js`: 언어와 이미지 대체 텍스트 전환, 결과 탭, HDF-EC 샘플·비교 위치 관리
 - `assets/js/pointcloud-viewer.js`: 회전 전용 VGGT point cloud 뷰어와 다운로드 진행 표시
 - `assets/js/reconstruction-data.js`: 변환기가 생성하는 파일 크기·해시·초기 카메라 설정
 - `assets/data/vggt/`: 500,000점 `reconstruction.ply`
 - `assets/vendor/three/`: Three.js 0.185.0 모듈과 MIT 라이선스
 - `assets/img/research/hdf-ec/`: HDF-EC input/result 비교 viewer용 웹 이미지
+- `assets/img/research/vggt-kitchen/`: 3D 데모 아래에 썸네일로 표시하는 공식 Kitchen 입력 사진 6장
 - `content/home.en.md`: 영문 홈페이지 원고 기준 파일
 - `content/home.kr.md`: 한글 홈페이지 원고 기준 파일
 - `docker-tutorial/`: 기존 Docker tutorial 문서
@@ -31,6 +32,8 @@
 첫 화면에서 영상 복원·self-supervised foundation model 연구와 3D reconstruction 관심을 함께 소개하고 NVIDIA Isaac Sim을 활용한 시뮬레이션을 강조합니다. 상단 키워드는 Image Restoration · Self-Supervised Learning · 3D Reconstruction · Digital Twin (Isaac Sim)으로 구성합니다. 연구 관심 분야는 같은 너비의 두 열로 배치하며 모바일에서는 세로로 표시합니다. Python / Go 등 구현 기술은 하단 기술 역량에 둡니다.
 
 Projects의 각 탭에는 데모와 조작 요소를 먼저 표시하고, 그 아래에 프로젝트명과 세 개의 bullet로 설명을 배치합니다. 한글은 `~함` 어체로 작성하며 영문도 같은 내용과 구조를 유지합니다. 3D Reconstruction 탭은 VGGT 기반 재구성·NVIDIA Triton Inference Server의 모델 서빙·NVIDIA Isaac Sim의 WebRTC 연동을 설명하고, 설명 아래에 GitHub 링크를 둡니다. Image Restoration 탭은 HDF-EC의 통합 노출 복원·Hierarchical Dual-Flow·일반화와 효율을 요약하며, 효율 수치는 별도 한 줄로 표시합니다. 두 탭의 데모·설명 아래에는 HVR-SSLE와 GoCV Contribution을 소개하고, HVR-SSLE 한글 설명도 `~함` 어체로 작성합니다.
+
+3D 데모와 프로젝트 설명 사이에는 입력 사진 6장을 썸네일로 배치합니다. VGGT가 여러 시점의 사진에서 3D 구조를 추정하는 모델임을 설명하고, 전체 원본 25장 중 일부를 보여준다는 점을 표시합니다. 데스크톱에서는 6열, 좁은 화면에서는 3열로 배치하며 사진은 원래 비율을 유지합니다. 선택한 원본 파일을 그대로 사용하고, 화면에는 작게 표시하며 지연 로딩합니다.
 
 Background는 학력 다음에 인빅 경력을 본문 너비의 독립 블록으로 배치합니다. 직책·재직 기간, 기존 Vision AI 개발 업무, 방위사업청 3D Reconstruction & Digital Twin 대표 과제 순서로 구성합니다. Omniverse·Isaac Sim은 과제의 기술 환경으로, 본인 역할은 기술 기획·협력기관 조율·영상 AI 개발·WebRTC와 OpenUSD 샘플을 활용한 초기 연동으로 표현합니다. 과제 전체 범위와 본인 담당 업무를 구분하며 연구 관심과 경력을 잇는 별도 서사는 추가하지 않습니다.
 
@@ -79,7 +82,7 @@ python3 -m venv /tmp/homepage-viewer-venv
 
 `--source-run`은 `pointcloud.npz`, `run_summary.json`, `transforms.json`을 포함한 완료 run 디렉터리입니다. 스크립트는 기록된 점 수, float32 XYZ, uint8 RGB, 배열 크기·유효성, 첫 카메라의 회전 행렬과 `world_from_vggt=identity`를 검사합니다. 필터링·점 감소·메시 생성 없이 순서 그대로 little-endian PLY로 내보내며, 모든 좌표·색상의 왕복 일치와 원본 해시를 확인합니다. `--metadata-output`의 JS 설정 파일에 점 수·파일 크기·SHA-256·초기 카메라 방향을 기록합니다. 이 옵션을 생략하면 PLY 옆에 JSON을 생성합니다.
 
-현재 PLY는 7,500,180바이트(약 7.5 MB), 500,000점입니다. 사용자가 웹앱에서 confidence percentile 50 및 500,000점 제한을 적용해 선택한 최종 NPZ를 그대로 변환합니다. 홈페이지에서는 필터링이나 점 감소를 다시 수행하지 않습니다. 대용량 데이터 파일은 `reconstruction.ply`만 게시하며, 입력 사진·NPZ·USD는 포함하지 않습니다. 원본과 출력 해시, 좌표·색상 처리 및 vendor 출처는 [데이터 기록](docs/pointcloud-provenance.md)에 있습니다.
+현재 PLY는 7,500,180바이트(약 7.5 MB), 500,000점입니다. 사용자가 웹앱에서 confidence percentile 50 및 500,000점 제한을 적용해 선택한 최종 NPZ를 그대로 변환합니다. 홈페이지에서는 필터링이나 점 감소를 다시 수행하지 않습니다. 3D 데이터는 `reconstruction.ply`만 게시하고 NPZ·USD는 포함하지 않으며, 입력 예시 사진 6장은 `assets/img/research/vggt-kitchen/`에 별도로 보관합니다. 원본과 출력 해시, 좌표·색상 처리 및 vendor 출처는 [데이터 기록](docs/pointcloud-provenance.md)에 있습니다.
 
 ## 검증
 
