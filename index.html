@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Dongwon Choo is a computer vision researcher and AI engineer working on image exposure restoration, low-light enhancement, and real-time vision AI systems."
+      content="Dongwon Choo works on image restoration and self-supervised foundation models, with interests in 3D reconstruction and simulation using NVIDIA Isaac Sim."
     >
     <title>Dongwon Choo | Computer Vision Researcher & AI Engineer</title>
     <link
@@ -18,7 +18,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="assets/css/styles.css?v=kitchen-500k-1">
+    <link rel="stylesheet" href="assets/css/styles.css?v=research-focus-2">
   </head>
   <body data-lang="en">
     <header class="site-header">
@@ -32,9 +32,9 @@
 
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="#research" data-i18n-en="Research" data-i18n-kr="연구">Research</a>
-        <a href="#experience" data-i18n-en="Experience" data-i18n-kr="경력">Experience</a>
-        <a href="#publications" data-i18n-en="Publications" data-i18n-kr="논문">Publications</a>
         <a href="#projects" data-i18n-en="Projects" data-i18n-kr="프로젝트">Projects</a>
+        <a href="#publications" data-i18n-en="Publications" data-i18n-kr="논문">Publications</a>
+        <a href="#experience" data-i18n-en="Background" data-i18n-kr="학력·경력">Background</a>
       </nav>
 
       <div class="language-switch" aria-label="Language switcher">
@@ -49,13 +49,14 @@
           <p class="eyebrow">Computer Vision Researcher & AI Engineer</p>
           <h1>Dongwon Choo</h1>
           <p class="hero-lead">
-            I work on image exposure restoration, low-light enhancement, and self-supervised learning,
-            with a focus on efficient vision models that can move from research prototypes to practical deployment.
+            I work on image restoration and self-supervised foundation models, with interests in
+            3D reconstruction and simulation using NVIDIA Isaac Sim.
           </p>
           <div class="hero-meta" aria-label="Profile summary">
-            <span>Pusan National University</span>
-            <span>Computer Vision</span>
-            <span>Python / Go</span>
+            <span>Image Restoration</span>
+            <span>Self-Supervised Learning</span>
+            <span>3D Reconstruction</span>
+            <span>Digital Twin (Isaac Sim)</span>
           </div>
           <div class="hero-actions" aria-label="Profile links">
             <a class="button button-primary" href="https://github.com/dwchoo" target="_blank" rel="noreferrer">GitHub</a>
@@ -67,13 +68,14 @@
           <p class="eyebrow">Computer Vision Researcher & AI Engineer</p>
           <h1>추동원</h1>
           <p class="hero-lead">
-            Computer vision을 중심으로 AI model과 self-supervised learning을 연구하며,
-            실제 환경에 적용 가능한 AI system 개발에 관심이 있습니다.
+            영상 복원과 self-supervised foundation model을 연구하며, 3D reconstruction과
+            NVIDIA Isaac Sim을 활용한 시뮬레이션에 관심을 두고 있습니다.
           </p>
           <div class="hero-meta" aria-label="프로필 요약">
-            <span>부산대학교</span>
-            <span>Computer Vision</span>
-            <span>Python / Go</span>
+            <span>Image Restoration</span>
+            <span>Self-Supervised Learning</span>
+            <span>3D Reconstruction</span>
+            <span>Digital Twin (Isaac Sim)</span>
           </div>
           <div class="hero-actions" aria-label="프로필 링크">
             <a class="button button-primary" href="https://github.com/dwchoo" target="_blank" rel="noreferrer">GitHub</a>
@@ -82,11 +84,51 @@
         </div>
       </section>
 
-      <section class="section comparison-section" aria-label="Project results" data-i18n-aria-en="Project results" data-i18n-aria-kr="프로젝트 결과">
+      <section class="section" id="research">
+        <div class="section-title-row lang-panel" data-lang-panel="en">
+          <h2>Research Interests</h2>
+        </div>
+        <div class="section-title-row lang-panel" data-lang-panel="kr">
+          <h2>연구 관심 분야</h2>
+        </div>
+
+        <div class="research-grid">
+          <article class="research-item">
+            <h3>Image Restoration</h3>
+            <div class="lang-panel" data-lang-panel="en">
+              <p>I study image restoration that generalizes to unseen environments. My work uses synthetic data and self-supervised learning to restore low-light, over-exposed, and backlit images while improving inference efficiency.</p>
+              <p class="related-work">Related work: HDF-EC, HVR-SSLE</p>
+            </div>
+            <div class="lang-panel" data-lang-panel="kr">
+              <p>학습하지 않은 환경에서도 강건하게 동작하는 영상 복원 모델을 연구합니다. 합성 데이터와 self-supervised learning을 활용해 저조도·과노출·역광을 복원하고, 일반화 성능과 추론 효율을 함께 개선합니다.</p>
+              <p class="related-work">관련 연구: HDF-EC, HVR-SSLE</p>
+            </div>
+          </article>
+          <article class="research-item">
+            <h3>3D Reconstruction</h3>
+            <div class="lang-panel" data-lang-panel="en">
+              <p>I am interested in multi-view 3D reconstruction and simulation using <strong>NVIDIA Isaac Sim</strong>.</p>
+              <p class="related-work">Related project: VGGT-ISAAC-SIM</p>
+            </div>
+            <div class="lang-panel" data-lang-panel="kr">
+              <p>다중 시점 영상 기반 3D 재구성과 <strong>NVIDIA Isaac Sim을 활용한 시뮬레이션</strong>에 관심을 두고 있습니다.</p>
+              <p class="related-work">관련 프로젝트: VGGT-ISAAC-SIM</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section comparison-section" id="projects">
+        <div class="section-title-row lang-panel" data-lang-panel="en">
+          <h2>Projects</h2>
+        </div>
+        <div class="section-title-row lang-panel" data-lang-panel="kr">
+          <h2>프로젝트</h2>
+        </div>
         <div class="result-tabs" role="tablist" aria-label="Project results" data-i18n-aria-en="Project results" data-i18n-aria-kr="프로젝트 결과">
-          <button type="button" id="tab-vggt" role="tab" aria-controls="panel-vggt" aria-selected="true" tabindex="0">VGGT-ISAAC-SIM</button>
+          <button type="button" id="tab-vggt" role="tab" aria-controls="panel-vggt" aria-selected="true" tabindex="0">3D Reconstruction</button>
           <span aria-hidden="true">|</span>
-          <button type="button" id="tab-hdf" role="tab" aria-controls="panel-hdf" aria-selected="false" tabindex="-1">HDF-EC</button>
+          <button type="button" id="tab-hdf" role="tab" aria-controls="panel-hdf" aria-selected="false" tabindex="-1">Image Restoration</button>
         </div>
         <div id="panel-vggt" role="tabpanel" aria-labelledby="tab-vggt" tabindex="0">
           <div class="pointcloud-viewer" data-pointcloud-viewer aria-busy="true">
@@ -98,6 +140,20 @@
           </div>
           <p class="viewer-caption lang-panel" data-lang-panel="en">Validation using the <a href="https://github.com/facebookresearch/vggt/tree/main/examples/kitchen" target="_blank" rel="noreferrer">official VGGT Kitchen example</a>: 25 source images duplicated to 50 inputs. Final result: 500,000 points.</p>
           <p class="viewer-caption lang-panel" data-lang-panel="kr"><a href="https://github.com/facebookresearch/vggt/tree/main/examples/kitchen" target="_blank" rel="noreferrer">공식 VGGT Kitchen 예제</a> 사진 25장을 각각 두 번 사용한 입력 50장으로 검증한 결과입니다. 최종 500,000점을 표시합니다.</p>
+          <div class="work-intro">
+            <h3><a href="https://github.com/dwchoo/vggt-isaac-sim" target="_blank" rel="noreferrer">VGGT-ISAAC-SIM</a></h3>
+            <ul class="work-points lang-panel" data-lang-panel="en">
+              <li><strong>VGGT-based 3D Reconstruction:</strong> I built a web application that estimates scene geometry and cameras from uploaded multi-view images using pretrained VGGT-1B. Reconstructions are exported as colored point clouds and OpenUSD scenes.</li>
+              <li><strong>NVIDIA Triton Inference Server:</strong> I separated GPU inference from the web application and deployed VGGT-1B as a serving endpoint, keeping the model resident in GPU memory to process each scene’s image set.</li>
+              <li><strong>NVIDIA Isaac Sim Integration:</strong> I integrated Isaac Sim rendering with WebRTC so users can rotate, pan, and zoom through reconstructed scenes in their browser. Users can also adjust confidence filtering without rerunning GPU inference and save the updated results.</li>
+            </ul>
+            <ul class="work-points lang-panel" data-lang-panel="kr">
+              <li><strong>VGGT 기반 3D Reconstruction:</strong> 다중 시점 사진을 업로드하면 사전 학습된 VGGT-1B로 장면의 3D 구조와 카메라를 추정하는 웹앱을 개발함. 재구성 결과를 컬러 포인트클라우드와 OpenUSD 장면으로 변환함.</li>
+              <li><strong>NVIDIA Triton Inference Server:</strong> 웹 애플리케이션과 GPU 추론을 분리하고, VGGT-1B를 GPU 메모리에 상주시켜 사진 묶음 단위로 실행하는 추론 서비스를 구성함.</li>
+              <li><strong>NVIDIA Isaac Sim 연동:</strong> OpenUSD 장면을 Isaac Sim에서 렌더링하고, WebRTC를 통해 브라우저에서 회전·이동·확대할 수 있도록 구현함. GPU 재추론 없이 confidence 필터를 조절하고 결과를 저장할 수 있도록 연결함.</li>
+            </ul>
+            <a class="work-link" href="https://github.com/dwchoo/vggt-isaac-sim" target="_blank" rel="noreferrer" data-i18n-en="View on GitHub" data-i18n-kr="GitHub에서 보기">View on GitHub</a>
+          </div>
         </div>
         <div id="panel-hdf" role="tabpanel" aria-labelledby="tab-hdf" tabindex="0" hidden>
           <div class="comparison-shell">
@@ -140,136 +196,46 @@
 
             <div class="sample-selector" aria-label="Sample selector" data-i18n-aria-en="Sample selector" data-i18n-aria-kr="샘플 선택" data-sample-selector></div>
           </div>
-        </div>
-      </section>
-
-      <section class="section two-column" id="research">
-        <div class="section-heading lang-panel" data-lang-panel="en">
-          <p class="eyebrow">Research</p>
-          <h2>Unified image exposure restoration</h2>
-        </div>
-        <div class="section-heading lang-panel" data-lang-panel="kr">
-          <p class="eyebrow">Research</p>
-          <h2>Unified image exposure restoration</h2>
-        </div>
-
-        <div class="section-body lang-panel" data-lang-panel="en">
-          <p>
-            I am a computer vision researcher and AI engineer specializing in image exposure restoration,
-            low-light enhancement, and self-supervised learning.
-          </p>
-          <p>I am also interested in 3D vision and simulation with NVIDIA Isaac Sim.</p>
-          <p>
-            My doctoral research focuses on unified image exposure restoration for challenging real-world
-            illumination conditions, including low-light, over-exposed, and backlit scenes. Instead of treating
-            under-exposure and over-exposure as separate problems, this work reformulates them as a single
-            exposure restoration task that aims to recover visually natural brightness, color, contrast, and
-            structural details.
-          </p>
-          <p>
-            The core contribution is HDF-EC, a Hierarchical Dual-Flow architecture for efficient and consistent
-            exposure correction. It combines a CNN-based low-level module for local texture and brightness
-            refinement with a Transformer-based high-level module for global exposure and structural consistency.
-          </p>
-          <div class="topic-block">
-            <h3>Research Topics</h3>
-            <ul class="topic-list">
-              <li>Low-light image enhancement</li>
-              <li>Image exposure correction</li>
-              <li>Self-supervised learning for image restoration</li>
-              <li>Unified exposure restoration for low-light, over-exposed, and backlit scenes</li>
-              <li>Efficient vision model deployment</li>
+          <div class="work-intro">
+            <h3>HDF-EC</h3>
+            <ul class="work-points lang-panel" data-lang-panel="en">
+              <li><strong>Unified Exposure Restoration:</strong> I proposed HDF-EC to restore low-light, over-exposed, and backlit images within a single model. Using synthetic data and self-supervised learning, I built a shared <strong>Foundation Model</strong> for exposure restoration.</li>
+              <li><strong>Hierarchical Dual-Flow:</strong> I formulated restoration as <strong>latent transport</strong> from degraded to normal exposure. The architecture combines local latent corrections by a CNN with global restoration targets estimated by a Transformer, reusing the same modules across successive restoration steps.</li>
+              <li><strong>Generalization and Inference Efficiency:</strong> I evaluated generalization on unseen datasets after fine-tuning the pretrained model on target data. Latent-space processing and weight sharing reduced model size and inference resource requirements.</li>
             </ul>
+            <ul class="work-points lang-panel" data-lang-panel="kr">
+              <li><strong>통합 노출 복원:</strong> 저조도·과노출·역광을 하나의 모델로 복원하는 HDF-EC를 제안함. 합성 데이터와 self-supervised learning으로 여러 노출 문제에 공통으로 활용할 수 있는 <strong>Foundation Model</strong>을 구축함.</li>
+              <li><strong>Hierarchical Dual-Flow:</strong> 열화된 입력의 잠재 표현을 정상 노출 상태로 옮기는 <strong>latent transport</strong>로 복원을 정식화함. CNN의 국소 보정과 Transformer의 전체 복원 목표 추정을 결합하고, 동일한 모듈을 반복 사용하도록 설계함.</li>
+              <li><strong>일반화 성능과 추론 효율:</strong> 사전학습 모델을 대상 데이터에 fine-tuning한 뒤, 학습에 사용하지 않은 데이터에서 일반화 성능을 검증함. 잠재 공간 연산과 가중치 공유로 모델 크기를 줄이고 추론 자원 사용량을 절감함.</li>
+            </ul>
+            <p class="work-metrics lang-panel" data-lang-panel="en"><strong>5.065M</strong> parameters · <strong>81.3 GFLOPs</strong> · <strong>0.420 GiB</strong> inference memory — 512 × 512 input</p>
+            <p class="work-metrics lang-panel" data-lang-panel="kr">파라미터 <strong>5.065M</strong> · 연산량 <strong>81.3 GFLOPs</strong> · 추론 메모리 <strong>0.420 GiB</strong> — 512 × 512 입력 기준</p>
           </div>
         </div>
 
-        <div class="section-body lang-panel" data-lang-panel="kr">
-          <p>
-            image exposure restoration, low-light enhancement, self-supervised learning을 연구하는 computer vision
-            연구자이자 AI engineer입니다.
-          </p>
-          <p>3D vision과 NVIDIA Isaac Sim을 활용한 시뮬레이션에도 관심이 있습니다.</p>
-          <p>
-            박사학위논문은 low-light, over-exposed, backlit scene처럼 실제 환경에서 자주 발생하는 까다로운
-            조명 조건을 대상으로 하는 unified image exposure restoration에 초점을 둡니다. under-exposure와
-            over-exposure를 별개의 문제로 다루기보다, 밝기, 색상, 대비, 구조적 디테일을 자연스럽게 복원하는
-            하나의 exposure restoration 문제로 재정의했습니다.
-          </p>
-          <p>
-            핵심 기여는 효율적이고 일관된 exposure correction을 위한 HDF-EC, 즉 Hierarchical Dual-Flow
-            architecture입니다. local texture와 brightness refinement를 담당하는 CNN 기반 low-level module과
-            global exposure 및 structural consistency를 담당하는 Transformer 기반 high-level module을 결합합니다.
-          </p>
-          <div class="topic-block">
-            <h3>연구 주제</h3>
-            <ul class="topic-list">
-              <li>Low-light image enhancement</li>
-              <li>Image exposure correction</li>
-              <li>Self-supervised learning 기반 image restoration</li>
-              <li>Low-light, over-exposed, backlit scene을 아우르는 unified exposure restoration</li>
-              <li>Efficient vision model deployment</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+        <div class="project-grid">
+          <article class="project-item lang-panel" data-lang-panel="en">
+            <div class="project-kicker">PyTorch / Low-Light Enhancement</div>
+            <h3><a href="https://github.com/dwchoo/HVR-SSLE" target="_blank" rel="noreferrer">HVR-SSLE</a></h3>
+            <p>First-author research published in <em>IEEE Access</em> on low-light enhancement learned from synthetic data. I evaluated generalization without using the target benchmarks' training data or additional fine-tuning, and released the PyTorch implementation of the 0.354M-parameter model.</p>
+          </article>
 
-      <section class="section timeline-section" id="experience">
-        <div class="section-title-row">
-          <div class="lang-panel" data-lang-panel="en">
-            <p class="eyebrow">Background</p>
-            <h2>Education & Experience</h2>
-          </div>
-          <div class="lang-panel" data-lang-panel="kr">
-            <p class="eyebrow">Background</p>
-            <h2>학력 및 경력</h2>
-          </div>
-        </div>
+          <article class="project-item lang-panel" data-lang-panel="kr">
+            <div class="project-kicker">PyTorch / Low-Light Enhancement</div>
+            <h3><a href="https://github.com/dwchoo/HVR-SSLE" target="_blank" rel="noreferrer">HVR-SSLE</a></h3>
+            <p>합성 데이터만으로 학습한 저조도 영상 개선 모델의 일반화 가능성을 검증한 제1저자 연구로, <em>IEEE Access</em>에 게재함. 평가 대상의 학습 데이터나 별도의 fine-tuning 없이 새로운 환경에서 평가했으며, 모델을 0.354M 파라미터로 구현하고 PyTorch 코드를 공개함.</p>
+          </article>
 
-        <div class="timeline lang-panel" data-lang-panel="en">
-          <article class="timeline-item">
-            <span class="timeline-date">2010.03 - 2017.02</span>
-            <h3>Pusan National University</h3>
-            <p>B.S. in Electronics Engineering</p>
+          <article class="project-item lang-panel" data-lang-panel="en">
+            <div class="project-kicker">Go / OpenCV</div>
+            <h3>GoCV Contribution</h3>
+            <p>Contributed missing Go wrapper functions and fixes for tests and type errors while using OpenCV CUDA functionality from Go. Both pull requests were merged into GoCV.</p>
           </article>
-          <article class="timeline-item">
-            <span class="timeline-date">2018.09 - 2026.08 expected</span>
-            <h3>Pusan National University</h3>
-            <p>Ph.D. in Information Convergence Engineering, AI Major</p>
-          </article>
-          <article class="timeline-item">
-            <span class="timeline-date">2023.01 - 2025.06</span>
-            <h3>InBic Inc. (startup)</h3>
-            <p>AI Development Team Lead / Senior Researcher</p>
-            <ul>
-              <li>Developed real-time vision AI models and operation systems.</li>
-              <li>Developed and optimized lightweight vision AI models using PyTorch, TensorFlow, TensorRT, NVIDIA Triton, and DeepStream.</li>
-              <li>Built high-speed video processing and real-time AI relay systems for H.264/H.265 RTSP streams using Go, OpenCV, and GoCV.</li>
-              <li>Developed edge-device vision AI solutions using Jetson and DeepStream.</li>
-            </ul>
-          </article>
-        </div>
 
-        <div class="timeline lang-panel" data-lang-panel="kr">
-          <article class="timeline-item">
-            <span class="timeline-date">2010.03 - 2017.02</span>
-            <h3>부산대학교</h3>
-            <p>전자공학과 학사</p>
-          </article>
-          <article class="timeline-item">
-            <span class="timeline-date">2018.09 - 2026.08 예정</span>
-            <h3>부산대학교</h3>
-            <p>정보융합공학과 AI 전공 박사</p>
-          </article>
-          <article class="timeline-item">
-            <span class="timeline-date">2023.01 - 2025.06</span>
-            <h3>인빅 주식회사 (스타트업)</h3>
-            <p>AI 개발 팀장 / 책임 연구원</p>
-            <ul>
-              <li>실시간 Vision AI 모델 개발 및 운용 시스템 개발</li>
-              <li>PyTorch, TensorFlow, TensorRT, NVIDIA Triton, DeepStream 기반 Vision AI 모델 개발 및 초경량화 수행</li>
-              <li>Go, OpenCV, GoCV를 활용해 H.264/H.265 RTSP 스트리밍 영상의 고속 처리, 실시간 AI 변환 및 중계 시스템을 개발</li>
-              <li>Jetson, DeepStream 기반 edge-device Vision AI 솔루션을 개발</li>
-            </ul>
+          <article class="project-item lang-panel" data-lang-panel="kr">
+            <div class="project-kicker">Go / OpenCV</div>
+            <h3>GoCV Contribution</h3>
+            <p>OpenCV CUDA 기능을 Go에서 사용하는 과정에서 누락된 Go wrapper 함수와 테스트·타입 오류를 보완함. 제안한 PR 2건이 공식 저장소에 병합됨</p>
           </article>
         </div>
       </section>
@@ -315,78 +281,86 @@
         </ol>
       </section>
 
-      <section class="section project-section" id="projects">
+      <section class="section timeline-section" id="experience">
         <div class="section-title-row lang-panel" data-lang-panel="en">
-          <div>
-            <p class="eyebrow">Projects</p>
-            <h2>Research implementation & open source</h2>
-          </div>
+          <h2>Background</h2>
         </div>
         <div class="section-title-row lang-panel" data-lang-panel="kr">
-          <div>
-            <p class="eyebrow">Projects</p>
-            <h2>연구 구현 및 open source</h2>
+          <h2>학력 및 경력</h2>
+        </div>
+
+        <div class="timeline lang-panel" data-lang-panel="en">
+          <article class="timeline-item">
+            <span class="timeline-date">2010.03 - 2017.02</span>
+            <h3>Pusan National University</h3>
+            <p>B.S. in Electronics Engineering</p>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-date">2018.09 - 2026.08</span>
+            <h3>Pusan National University</h3>
+            <p>Ph.D. in Information Convergence Engineering, AI Major</p>
+          </article>
+        </div>
+
+        <div class="timeline lang-panel" data-lang-panel="kr">
+          <article class="timeline-item">
+            <span class="timeline-date">2010.03 - 2017.02</span>
+            <h3>부산대학교</h3>
+            <p>전자공학과 학사</p>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-date">2018.09 - 2026.08</span>
+            <h3>부산대학교</h3>
+            <p>정보융합공학과 AI 전공 박사</p>
+          </article>
+        </div>
+
+        <article class="experience-item lang-panel" data-lang-panel="en">
+          <h3>InBic Inc. (startup)</h3>
+          <p class="experience-role">Senior Researcher (led Development Team 1)</p>
+          <p class="timeline-date">2023.01 - 2025.06</p>
+          <h4>Vision AI Development</h4>
+          <ul>
+            <li>Developed real-time CCTV low-light enhancement and multi-channel object detection systems, with TensorRT inference optimization.</li>
+            <li>Designed and implemented a Go RTSP backend, using shared memory to connect video reception, AI processing, and transmission in Python.</li>
+            <li>Ported and verified low-light enhancement and object detection on Jetson AGX Orin, and contributed to Grade 1 GS certification of the low-light enhancement software.</li>
+            <li>Designed a FastAPI image/video processing platform and designed and developed a Python gRPC server for B2B vision AI.</li>
+          </ul>
+          <div class="featured-project">
+            <h4>3D Reconstruction &amp; Digital Twin — DAPA R&amp;D Project</h4>
+            <ul>
+              <li>Coordinated technical planning and partner collaboration for a DAPA R&amp;D project involving 3D reconstruction and digital twins using NVIDIA Omniverse and Isaac Sim.</li>
+              <li>Developed image enhancement and object detection pipelines, and implemented an initial web integration demo of Omniverse visualization using WebRTC and provided OpenUSD samples.</li>
+            </ul>
           </div>
-        </div>
+        </article>
 
-        <div class="project-grid">
-          <article class="project-item lang-panel" data-lang-panel="en">
-            <div class="project-kicker">3D Vision / OpenUSD / Isaac Sim</div>
-            <h3><a href="https://github.com/dwchoo/vggt-isaac-sim" target="_blank" rel="noreferrer">VGGT-ISAAC-SIM</a></h3>
-            <p>Developed a pipeline for VGGT-based multi-view 3D reconstruction, OpenUSD export, and visualization in Isaac Sim.</p>
-            <p class="project-note">Demo: the <a href="https://github.com/facebookresearch/vggt/tree/main/examples/kitchen" target="_blank" rel="noreferrer">official VGGT Kitchen example</a>, with 25 source images duplicated to 50 inputs for validation; 500,000 points shown.</p>
-          </article>
-          <article class="project-item lang-panel" data-lang-panel="kr">
-            <div class="project-kicker">3D Vision / OpenUSD / Isaac Sim</div>
-            <h3><a href="https://github.com/dwchoo/vggt-isaac-sim" target="_blank" rel="noreferrer">VGGT-ISAAC-SIM</a></h3>
-            <p>VGGT 기반 다중 시점 3D 재구성, OpenUSD 내보내기 및 Isaac Sim 시각화 파이프라인 개발</p>
-            <p class="project-note">데모: <a href="https://github.com/facebookresearch/vggt/tree/main/examples/kitchen" target="_blank" rel="noreferrer">공식 VGGT Kitchen 예제</a> 사진 25장을 각각 두 번 사용한 입력 50장으로 검증 수행. 최종 500,000점 결과를 표시함</p>
-          </article>
-          <article class="project-item lang-panel" data-lang-panel="en">
-            <div class="project-kicker">PyTorch / Low-Light Enhancement</div>
-            <h3><a href="https://github.com/dwchoo/HVR-SSLE" target="_blank" rel="noreferrer">HVR-SSLE</a></h3>
-            <p>
-              Official PyTorch implementation of the HVR-SSLE paper, which proposes a compact self-supervised
-              low-light image enhancement model. The repository includes training and inference pipelines,
-              dataset configuration, checkpoint handling, and analysis resources for reproducible research.
-            </p>
-          </article>
-
-          <article class="project-item lang-panel" data-lang-panel="kr">
-            <div class="project-kicker">PyTorch / Low-Light Enhancement</div>
-            <h3><a href="https://github.com/dwchoo/HVR-SSLE" target="_blank" rel="noreferrer">HVR-SSLE</a></h3>
-            <p>
-              compact self-supervised low-light image enhancement 모델을 제안한 HVR-SSLE 논문의 official PyTorch
-              implementation을 공개함. Training/inference pipeline, dataset configuration, checkpoint handling,
-              analysis resource를 포함해 연구 재현성을 고려함
-            </p>
-          </article>
-
-          <article class="project-item lang-panel" data-lang-panel="en">
-            <div class="project-kicker">Go / OpenCV</div>
-            <h3>GoCV Contribution</h3>
-            <p>
-              Contributed to GoCV, a Go package for computer vision using OpenCV. This reflects my interest in
-              connecting computer vision research with practical software engineering.
-            </p>
-          </article>
-
-          <article class="project-item lang-panel" data-lang-panel="kr">
-            <div class="project-kicker">Go / OpenCV</div>
-            <h3>GoCV Contribution</h3>
-            <p>
-              OpenCV 기반 Go computer vision library인 GoCV에 기여함. Computer vision 연구를 실제 소프트웨어
-              구현과 연결하는 open-source contribution 수행
-            </p>
-          </article>
-        </div>
+        <article class="experience-item lang-panel" data-lang-panel="kr">
+          <h3>인빅 주식회사 (스타트업)</h3>
+          <p class="experience-role">책임연구원 (실무상 개발1팀을 이끎)</p>
+          <p class="timeline-date">2023.01 - 2025.06</p>
+          <h4>Vision AI 개발</h4>
+          <ul>
+            <li>실시간 CCTV 저조도 영상 개선·다채널 객체 탐지 시스템 개발 및 TensorRT 기반 추론 최적화 수행</li>
+            <li>Go 기반 RTSP 서버와 공유 메모리로 Python의 영상 수신·AI 처리·송신을 연결하는 실시간 영상 backend 설계·구현</li>
+            <li>Jetson AGX Orin에 저조도 개선·객체 탐지 기능 이식·검증 및 저조도 개선 SW의 GS 인증 1등급 취득에 기여함</li>
+            <li>FastAPI 기반 이미지·동영상 처리 플랫폼의 구조 설계 및 B2B 영상 AI용 Python gRPC 서버 설계·개발</li>
+          </ul>
+          <div class="featured-project">
+            <h4>3D Reconstruction &amp; Digital Twin — 방위사업청 R&amp;D 과제</h4>
+            <ul>
+              <li>3D reconstruction과 NVIDIA Omniverse·Isaac Sim 기반 Digital Twin을 포함한 방위사업청 과제에서 기술 기획 및 협력기관 조율 수행</li>
+              <li>영상 개선·객체 탐지 pipeline 개발, Omniverse 화면의 WebRTC 기반 웹 연동 및 OpenUSD 샘플을 활용한 초기 통합 시연 구현</li>
+            </ul>
+          </div>
+        </article>
       </section>
 
       <section class="section skills-section">
         <div class="section-title-row lang-panel" data-lang-panel="en">
           <div>
             <p class="eyebrow">Skills</p>
-            <h2>Technical focus</h2>
+            <h2>Technical Skills</h2>
           </div>
         </div>
         <div class="section-title-row lang-panel" data-lang-panel="kr">
@@ -401,17 +375,22 @@
           <span>Low-Light Enhancement</span>
           <span>Image Exposure Correction</span>
           <span>Self-Supervised Learning</span>
+          <span>3D Reconstruction</span>
+          <span>NVIDIA Isaac Sim</span>
+          <span>NVIDIA Omniverse</span>
+          <span>OpenUSD</span>
           <span>Python</span>
           <span>Go</span>
           <span>PyTorch</span>
-          <span>TensorFlow</span>
           <span>TensorRT</span>
-          <span>NVIDIA Triton</span>
+          <span>RT-DETR</span>
           <span>OpenCV</span>
           <span>GoCV</span>
           <span>Jetson</span>
-          <span>DeepStream</span>
           <span>RTSP Streaming</span>
+          <span>Shared Memory</span>
+          <span>FastAPI</span>
+          <span>gRPC</span>
         </div>
       </section>
     </main>
@@ -424,6 +403,6 @@
       </span>
     </footer>
 
-    <script src="assets/js/site.js?v=kitchen-500k-1"></script>
+    <script src="assets/js/site.js?v=research-focus-1"></script>
   </body>
 </html>

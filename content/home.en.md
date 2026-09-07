@@ -2,41 +2,58 @@
 
 Computer Vision Researcher & AI Engineer
 
-I work on image exposure restoration, low-light enhancement, and self-supervised learning, with a focus on building efficient vision models that can move from research prototypes to practical deployment.
+I work on image restoration and self-supervised foundation models, with interests in 3D reconstruction and simulation using NVIDIA Isaac Sim.
+
+Image Restoration · Self-Supervised Learning · 3D Reconstruction · Digital Twin (Isaac Sim)
 
 - GitHub: <https://github.com/dwchoo>
 - LinkedIn: <https://www.linkedin.com/in/dwchoo1991/>
 
-## About
+## Research Interests
 
-I am a computer vision researcher and AI engineer specializing in image exposure restoration, low-light enhancement, and self-supervised learning. I am expected to receive my Ph.D. from the AI major in the Department of Information Convergence Engineering at Pusan National University in August 2026.
+### Image Restoration
 
-My work focuses on restoring degraded images under challenging illumination conditions while maintaining practical computational efficiency. I have experience developing deep learning models in Python and production-oriented software in Go, and I have contributed to GoCV, an OpenCV-based computer vision library for Go.
+I study image restoration that generalizes to unseen environments. My work uses synthetic data and self-supervised learning to restore low-light, over-exposed, and backlit images while improving inference efficiency.
 
-I am also interested in 3D vision and simulation with NVIDIA Isaac Sim.
+Related work: HDF-EC, HVR-SSLE
 
-## Dissertation Research
+### 3D Reconstruction
 
-My doctoral research focuses on **unified image exposure restoration** for challenging real-world illumination conditions, including low-light, over-exposed, and backlit scenes. Instead of treating under-exposure and over-exposure as separate problems, this work reformulates them as a single exposure restoration task that aims to recover visually natural brightness, color, contrast, and structural details.
+I am interested in multi-view 3D reconstruction and simulation using **NVIDIA Isaac Sim**.
 
-The core contribution of this research is **HDF-EC**, a Hierarchical Dual-Flow architecture designed for efficient and consistent exposure correction. The model combines a CNN-based low-level module for local texture and brightness refinement with a Transformer-based high-level module for global exposure and structural consistency. This design targets robust restoration quality across multiple exposure benchmarks while maintaining practical deployment efficiency.
+Related project: VGGT-ISAAC-SIM
 
-## Education
+## Projects
 
-- Pusan National University, B.S. in Electronics Engineering, 2010.03 - 2017.02
-- Pusan National University, Ph.D. in Information Convergence Engineering, AI Major, 2018.09 - 2026.08 expected
+### 3D Reconstruction — VGGT-ISAAC-SIM
 
-## Experience
+<!-- Layout: show the 3D demo and its source caption before the project description. -->
 
-### InBic Inc. (startup)
+Demo source: the [official VGGT Kitchen example](https://github.com/facebookresearch/vggt/tree/main/examples/kitchen). The 25 source images were duplicated to form a 50-image validation run; the viewer shows the final 500,000-point result.
 
-AI Development Team Lead / Senior Researcher  
-2023.01 - 2025.06
+- **VGGT-based 3D Reconstruction:** I built a web application that estimates scene geometry and cameras from uploaded multi-view images using pretrained VGGT-1B. Reconstructions are exported as colored point clouds and OpenUSD scenes.
+- **NVIDIA Triton Inference Server:** I separated GPU inference from the web application and deployed VGGT-1B as a serving endpoint, keeping the model resident in GPU memory to process each scene’s image set.
+- **NVIDIA Isaac Sim Integration:** I integrated Isaac Sim rendering with WebRTC so users can rotate, pan, and zoom through reconstructed scenes in their browser. Users can also adjust confidence filtering without rerunning GPU inference and save the updated results.
 
-- Developed real-time vision AI models and operation systems.
-- Developed and optimized lightweight vision AI models using PyTorch, TensorFlow, TensorRT, NVIDIA Triton, and DeepStream.
-- Built high-speed video processing and real-time AI relay systems for H.264/H.265 RTSP streams using Go, OpenCV, and GoCV.
-- Developed edge-device vision AI solutions using Jetson and DeepStream.
+[View on GitHub](https://github.com/dwchoo/vggt-isaac-sim)
+
+### Image Restoration — HDF-EC
+
+<!-- Layout: show the comparison demo and sample controls before the research description. -->
+
+- **Unified Exposure Restoration:** I proposed HDF-EC to restore low-light, over-exposed, and backlit images within a single model. Using synthetic data and self-supervised learning, I built a shared **Foundation Model** for exposure restoration.
+- **Hierarchical Dual-Flow:** I formulated restoration as **latent transport** from degraded to normal exposure. The architecture combines local latent corrections by a CNN with global restoration targets estimated by a Transformer, reusing the same modules across successive restoration steps.
+- **Generalization and Inference Efficiency:** I evaluated generalization on unseen datasets after fine-tuning the pretrained model on target data. Latent-space processing and weight sharing reduced model size and inference resource requirements.
+
+**5.065M** parameters · **81.3 GFLOPs** · **0.420 GiB** inference memory — 512 × 512 input
+
+### HVR-SSLE
+
+[HVR-SSLE](https://github.com/dwchoo/HVR-SSLE): First-author research published in *IEEE Access* on low-light enhancement learned from synthetic data. I evaluated generalization without using the target benchmarks' training data or additional fine-tuning, and released the PyTorch implementation of the 0.354M-parameter model.
+
+### GoCV Contribution
+
+Contributed missing Go wrapper functions and fixes for tests and type errors while using OpenCV CUDA functionality from Go. Both pull requests were merged into GoCV.
 
 ## Selected Publications
 
@@ -44,28 +61,39 @@ AI Development Team Lead / Senior Researcher
 - Q. Deng, **D. Choo**, H. Ji, and D. Lee, "A 5K Efficient Low-Light Enhancement Model by Estimating Increment between Dark Image and Transmission Map Based on Local Maximum Color Value Prior," *Electronics*, vol. 13, p. 1814, 2024.
 - M.-j. Kim, Q. Deng, **D. Choo**, H. C. Ji, and D. Lee, "AGCSNet: High-contrast image-exposure correction with automatic illumination-map attention-based gamma and saturation correction," *ETRI Journal*, 2025.
 
-## Projects
+## Background
 
-### VGGT-ISAAC-SIM
+### Education
 
-[VGGT-ISAAC-SIM](https://github.com/dwchoo/vggt-isaac-sim): Developed a pipeline for VGGT-based multi-view 3D reconstruction, OpenUSD export, and visualization in Isaac Sim.
+- Pusan National University, B.S. in Electronics Engineering, 2010.03 - 2017.02
+- Pusan National University, Ph.D. in Information Convergence Engineering, AI Major, 2018.09 - 2026.08
 
-Demo source: the [official VGGT Kitchen example](https://github.com/facebookresearch/vggt/tree/main/examples/kitchen). The 25 source images were duplicated to form a 50-image validation run; the viewer shows the final 500,000-point result.
+### InBic Inc. (startup)
 
-### HVR-SSLE
+Senior Researcher (led Development Team 1)
 
-[HVR-SSLE](https://github.com/dwchoo/HVR-SSLE) is the official PyTorch implementation of the HVR-SSLE paper, which proposes a compact self-supervised low-light image enhancement model. The repository includes training and inference pipelines, dataset configuration, checkpoint handling, and analysis resources for reproducible research.
+2023.01 - 2025.06
 
-### GoCV Contribution
+#### Vision AI Development
 
-Contributed to GoCV, a Go package for computer vision using OpenCV. This reflects my interest in connecting computer vision research with practical software engineering.
+- Developed real-time CCTV low-light enhancement and multi-channel object detection systems, with TensorRT inference optimization.
+- Designed and implemented a Go RTSP backend, using shared memory to connect video reception, AI processing, and transmission in Python.
+- Ported and verified low-light enhancement and object detection on Jetson AGX Orin, and contributed to Grade 1 GS certification of the low-light enhancement software.
+- Designed a FastAPI image/video processing platform and designed and developed a Python gRPC server for B2B vision AI.
 
-## Skills
+#### 3D Reconstruction & Digital Twin — DAPA R&D Project
 
-- Research: Computer Vision, Low-Light Image Enhancement, Image Exposure Correction, Self-Supervised Learning
+- Coordinated technical planning and partner collaboration for a DAPA R&D project involving 3D reconstruction and digital twins using NVIDIA Omniverse and Isaac Sim.
+- Developed image enhancement and object detection pipelines, and implemented an initial web integration demo of Omniverse visualization using WebRTC and provided OpenUSD samples.
+
+## Technical Skills
+
+- Research: Computer Vision, Low-Light Image Enhancement, Image Exposure Correction, Self-Supervised Learning, 3D Reconstruction
 - Programming: Python, Go
-- Deep Learning: PyTorch, TensorFlow, TensorRT, model training, inference pipelines, experiment analysis
-- Vision Systems: OpenCV, GoCV, NVIDIA Triton, Jetson, DeepStream, RTSP streaming, image restoration workflows
+- Deep Learning: PyTorch, TensorRT, RT-DETR, model training, inference pipelines, experiment analysis
+- Vision Systems: OpenCV, GoCV, Jetson, RTSP streaming, shared memory
+- AI Platforms: FastAPI, gRPC
+- 3D Tools: NVIDIA Isaac Sim, NVIDIA Omniverse, OpenUSD
 
 <!-- 3D viewer UI copy (implementation reference)
 Loading 3D reconstruction…
