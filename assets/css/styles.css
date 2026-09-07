@@ -306,10 +306,6 @@ h3 {
   font-weight: 600;
 }
 
-.comparison-section .project-grid {
-  margin-top: 36px;
-}
-
 .section-title-row {
   display: flex;
   justify-content: space-between;
@@ -449,8 +445,7 @@ h3 {
 }
 
 .timeline-item,
-.publication-list li,
-.project-item,
+.publication-list > li,
 .research-item {
   background: var(--panel);
 }
@@ -526,14 +521,14 @@ h3 {
   counter-reset: publication;
 }
 
-.publication-list li {
+.publication-list > li {
   position: relative;
   padding: 20px 24px 20px 68px;
   border: 1px solid var(--line);
   counter-increment: publication;
 }
 
-.publication-list li::before {
+.publication-list > li::before {
   content: counter(publication, decimal-leading-zero);
   position: absolute;
   left: 24px;
@@ -552,7 +547,6 @@ h3 {
   color: var(--teal-dark);
 }
 
-.project-grid,
 .research-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -562,22 +556,45 @@ h3 {
   background: var(--line);
 }
 
-.project-item,
 .research-item {
   min-height: 220px;
   padding: 24px;
 }
 
-.project-kicker {
-  margin-bottom: 18px;
-  color: var(--amber);
-  font-size: 0.78rem;
-  font-weight: 800;
-  text-transform: uppercase;
+.publication-highlights {
+  margin: 14px 0 0;
+  padding-left: 20px;
+  color: var(--muted);
+  font-size: 0.75rem;
 }
 
-.project-item p {
-  margin-bottom: 0;
+.publication-highlights li + li {
+  margin-top: 6px;
+}
+
+.resource-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 14px;
+  color: var(--teal-dark);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.open-source-contributions {
+  max-width: 1120px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.open-source-contributions h4 {
+  margin: 18px 0 8px;
+}
+
+.open-source-contributions p {
+  margin: 0;
   color: var(--muted);
 }
 
@@ -631,7 +648,6 @@ h3 {
   }
 
   .timeline,
-  .project-grid,
   .research-grid {
     grid-template-columns: 1fr;
   }
@@ -688,8 +704,7 @@ h3 {
   }
 
   .timeline-item,
-  .publication-list li,
-  .project-item,
+  .publication-list > li,
   .research-item,
   .experience-item {
     padding: 22px;
@@ -701,11 +716,11 @@ h3 {
     padding-left: 8px;
   }
 
-  .publication-list li {
+  .publication-list > li {
     padding-top: 52px;
   }
 
-  .publication-list li::before {
+  .publication-list > li::before {
     left: 22px;
     top: 20px;
   }
@@ -850,8 +865,7 @@ body[data-lang="kr"] .timeline.lang-panel[data-lang-panel="kr"] {
   font-variant-numeric: tabular-nums;
 }
 
-.viewer-caption,
-.project-item .project-note {
+.viewer-caption {
   margin: 14px 0 0;
   color: var(--muted);
   font-size: 0.82rem;

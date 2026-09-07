@@ -53,19 +53,29 @@ Demo source: the [official VGGT Kitchen example](https://github.com/facebookrese
 
 **5.065M** parameters · **81.3 GFLOPs** · **0.420 GiB** inference memory — 512 × 512 input
 
-### HVR-SSLE
-
-[HVR-SSLE](https://github.com/dwchoo/HVR-SSLE): First-author research published in *IEEE Access* on low-light enhancement learned from synthetic data. I evaluated generalization without using the target benchmarks' training data or additional fine-tuning, and released the PyTorch implementation of the 0.354M-parameter model.
-
-### GoCV Contribution
-
-Contributed missing Go wrapper functions and fixes for tests and type errors while using OpenCV CUDA functionality from Go. Both pull requests were merged into GoCV.
-
 ## Selected Publications
 
 - **D. Choo**, Q. Deng, T. Park, and D. Lee, "HVR-SSLE: Hierarchical Visual Reasoning for Self-Supervised Low-Light Image Enhancement," *IEEE Access*, vol. 14, pp. 34705-34725, 2026.
+
+  - **Synthetic Data & Self-Supervised Learning:** Generated low-light/normal-image pairs from COCO using parametric curves and learned restoration through self-supervised learning.
+  - **Hierarchical Recurrent Model:** Combined local CNN corrections and global Transformer adjustments in a hierarchical recurrent model that shares weights across steps.
+  - **Zero-reference Generalization:** Evaluated generalization on unseen benchmarks without using their training data or additional fine-tuning.
+
+  [Paper](https://doi.org/10.1109/ACCESS.2026.3665009) · [Code](https://github.com/dwchoo/HVR-SSLE)
+
 - Q. Deng, **D. Choo**, H. Ji, and D. Lee, "A 5K Efficient Low-Light Enhancement Model by Estimating Increment between Dark Image and Transmission Map Based on Local Maximum Color Value Prior," *Electronics*, vol. 13, p. 1814, 2024.
+
+  - Estimated RGB transmission maps from dark-image increments, with color correction and denoising to improve low-light images.
+  - Used just 4.7K parameters to reduce model size for deployment on resource-constrained devices.
+
+  [Paper](https://doi.org/10.3390/electronics13101814)
+
 - M.-j. Kim, Q. Deng, **D. Choo**, H. C. Ji, and D. Lee, "AGCSNet: High-contrast image-exposure correction with automatic illumination-map attention-based gamma and saturation correction," *ETRI Journal*, 2025.
+
+  - Used illumination-map attention and two gamma corrections to jointly adjust underexposed and overexposed regions in one image.
+  - Predicted gamma and saturation factors from the input, correcting saturation shifts caused by exposure adjustment.
+
+  [Paper](https://doi.org/10.4218/etrij.2024-0294)
 
 ## Background
 
@@ -100,6 +110,14 @@ Senior Researcher (led Development Team 1)
 - Vision Systems: OpenCV, GoCV, Jetson, RTSP streaming, shared memory
 - AI Platforms: FastAPI, gRPC
 - 3D Tools: NVIDIA Isaac Sim, NVIDIA Omniverse, OpenUSD
+
+### Open-source Contributions
+
+#### GoCV
+
+Contributed missing Go wrapper functions and fixes for tests and type errors while using OpenCV CUDA functionality from Go. Both pull requests were merged into GoCV.
+
+[PR #1142 · Stream wrappers](https://github.com/hybridgroup/gocv/pull/1142) · [PR #1167 · Tests & type fixes](https://github.com/hybridgroup/gocv/pull/1167)
 
 <!-- 3D viewer UI copy (implementation reference)
 Loading 3D reconstruction…

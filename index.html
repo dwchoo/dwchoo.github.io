@@ -18,7 +18,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="assets/css/styles.css?v=kitchen-inputs-1">
+    <link rel="stylesheet" href="assets/css/styles.css?v=publication-highlights-3">
   </head>
   <body data-lang="en">
     <header class="site-header">
@@ -233,31 +233,6 @@
           </div>
         </div>
 
-        <div class="project-grid">
-          <article class="project-item lang-panel" data-lang-panel="en">
-            <div class="project-kicker">PyTorch / Low-Light Enhancement</div>
-            <h3><a href="https://github.com/dwchoo/HVR-SSLE" target="_blank" rel="noreferrer">HVR-SSLE</a></h3>
-            <p>First-author research published in <em>IEEE Access</em> on low-light enhancement learned from synthetic data. I evaluated generalization without using the target benchmarks' training data or additional fine-tuning, and released the PyTorch implementation of the 0.354M-parameter model.</p>
-          </article>
-
-          <article class="project-item lang-panel" data-lang-panel="kr">
-            <div class="project-kicker">PyTorch / Low-Light Enhancement</div>
-            <h3><a href="https://github.com/dwchoo/HVR-SSLE" target="_blank" rel="noreferrer">HVR-SSLE</a></h3>
-            <p>합성 데이터만으로 학습한 저조도 영상 개선 모델의 일반화 가능성을 검증한 제1저자 연구로, <em>IEEE Access</em>에 게재함. 평가 대상의 학습 데이터나 별도의 fine-tuning 없이 새로운 환경에서 평가했으며, 모델을 0.354M 파라미터로 구현하고 PyTorch 코드를 공개함.</p>
-          </article>
-
-          <article class="project-item lang-panel" data-lang-panel="en">
-            <div class="project-kicker">Go / OpenCV</div>
-            <h3>GoCV Contribution</h3>
-            <p>Contributed missing Go wrapper functions and fixes for tests and type errors while using OpenCV CUDA functionality from Go. Both pull requests were merged into GoCV.</p>
-          </article>
-
-          <article class="project-item lang-panel" data-lang-panel="kr">
-            <div class="project-kicker">Go / OpenCV</div>
-            <h3>GoCV Contribution</h3>
-            <p>OpenCV CUDA 기능을 Go에서 사용하는 과정에서 누락된 Go wrapper 함수와 테스트·타입 오류를 보완함. 제안한 PR 2건이 공식 저장소에 병합됨</p>
-          </article>
-        </div>
       </section>
 
       <section class="section" id="publications">
@@ -281,6 +256,20 @@
               "HVR-SSLE: Hierarchical Visual Reasoning for Self-Supervised Low-Light Image Enhancement,"
               <em>IEEE Access</em>, vol. 14, pp. 34705-34725, 2026.
             </p>
+            <ul class="publication-highlights lang-panel" data-lang-panel="en">
+              <li><strong>Synthetic Data &amp; Self-Supervised Learning:</strong> Generated low-light/normal-image pairs from COCO using parametric curves and learned restoration through self-supervised learning.</li>
+              <li><strong>Hierarchical Recurrent Model:</strong> Combined local CNN corrections and global Transformer adjustments in a hierarchical recurrent model that shares weights across steps.</li>
+              <li><strong>Zero-reference Generalization:</strong> Evaluated generalization on unseen benchmarks without using their training data or additional fine-tuning.</li>
+            </ul>
+            <ul class="publication-highlights lang-panel" data-lang-panel="kr">
+              <li><strong>Synthetic Data &amp; Self-Supervised Learning:</strong> COCO 영상에 Parametric Curve를 적용해 저조도·정상 영상 쌍을 합성하고, self-supervised learning으로 복원을 학습함.</li>
+              <li><strong>Hierarchical Recurrent Model:</strong> CNN의 국소 보정과 Transformer의 전역 조정을 계층적으로 결합하고, 단계 간 가중치를 공유하며 반복 복원하도록 설계함.</li>
+              <li><strong>Zero-reference Generalization:</strong> 평가 대상 benchmark의 학습 데이터나 추가 fine-tuning 없이, 학습하지 않은 환경에서 일반화 가능성을 검증함.</li>
+            </ul>
+            <div class="resource-links">
+              <a href="https://doi.org/10.1109/ACCESS.2026.3665009" target="_blank" rel="noreferrer" data-i18n-en="Paper" data-i18n-kr="논문">Paper</a>
+              <a href="https://github.com/dwchoo/HVR-SSLE" target="_blank" rel="noreferrer" data-i18n-en="Code" data-i18n-kr="코드">Code</a>
+            </div>
           </li>
           <li>
             <p>
@@ -289,6 +278,17 @@
               Transmission Map Based on Local Maximum Color Value Prior,"
               <em>Electronics</em>, vol. 13, p. 1814, 2024.
             </p>
+            <ul class="publication-highlights lang-panel" data-lang-panel="en">
+              <li>Estimated RGB transmission maps from dark-image increments, with color correction and denoising to improve low-light images.</li>
+              <li>Used just 4.7K parameters to reduce model size for deployment on resource-constrained devices.</li>
+            </ul>
+            <ul class="publication-highlights lang-panel" data-lang-panel="kr">
+              <li>어두운 입력 영상과 RGB 투과 맵 사이의 증분을 추정하고, 색상 보정과 노이즈 제거를 결합해 저조도 영상을 개선함.</li>
+              <li>4.7K 파라미터의 경량 모델로 구현해 자원이 제한된 장치에서의 활용 부담을 줄임.</li>
+            </ul>
+            <div class="resource-links">
+              <a href="https://doi.org/10.3390/electronics13101814" target="_blank" rel="noreferrer" data-i18n-en="Paper" data-i18n-kr="논문">Paper</a>
+            </div>
           </li>
           <li>
             <p>
@@ -297,6 +297,17 @@
               attention-based gamma and saturation correction,"
               <em>ETRI Journal</em>, 2025.
             </p>
+            <ul class="publication-highlights lang-panel" data-lang-panel="en">
+              <li>Used illumination-map attention and two gamma corrections to jointly adjust underexposed and overexposed regions in one image.</li>
+              <li>Predicted gamma and saturation factors from the input, correcting saturation shifts caused by exposure adjustment.</li>
+            </ul>
+            <ul class="publication-highlights lang-panel" data-lang-panel="kr">
+              <li>조명 맵과 두 가지 gamma 보정을 활용해 한 영상 안의 어두운 영역과 과노출 영역을 함께 보정함.</li>
+              <li>입력 영상에 맞는 gamma·채도 계수를 예측하고, 노출 보정 과정에서 발생하는 채도 왜곡을 보완함.</li>
+            </ul>
+            <div class="resource-links">
+              <a href="https://doi.org/10.4218/etrij.2024-0294" target="_blank" rel="noreferrer" data-i18n-en="Paper" data-i18n-kr="논문">Paper</a>
+            </div>
           </li>
         </ol>
       </section>
@@ -376,7 +387,7 @@
         </article>
       </section>
 
-      <section class="section skills-section">
+      <section class="section skills-section" id="skills">
         <div class="section-title-row lang-panel" data-lang-panel="en">
           <div>
             <p class="eyebrow">Skills</p>
@@ -411,6 +422,17 @@
           <span>Shared Memory</span>
           <span>FastAPI</span>
           <span>gRPC</span>
+        </div>
+        <div class="open-source-contributions">
+          <h3 class="lang-panel" data-lang-panel="en">Open-source Contributions</h3>
+          <h3 class="lang-panel" data-lang-panel="kr">오픈소스 기여</h3>
+          <h4>GoCV</h4>
+          <p class="lang-panel" data-lang-panel="en">Contributed missing Go wrapper functions and fixes for tests and type errors while using OpenCV CUDA functionality from Go. Both pull requests were merged into GoCV.</p>
+          <p class="lang-panel" data-lang-panel="kr">OpenCV CUDA 기능을 Go에서 사용하는 과정에서 누락된 Go wrapper 함수와 테스트·타입 오류를 보완함. 제안한 PR 2건이 공식 저장소에 병합됨.</p>
+          <div class="resource-links">
+            <a href="https://github.com/hybridgroup/gocv/pull/1142" target="_blank" rel="noreferrer" data-i18n-en="PR #1142 · Stream wrappers" data-i18n-kr="PR #1142 · Stream 함수">PR #1142 · Stream wrappers</a>
+            <a href="https://github.com/hybridgroup/gocv/pull/1167" target="_blank" rel="noreferrer" data-i18n-en="PR #1167 · Tests &amp; type fixes" data-i18n-kr="PR #1167 · 테스트·타입 수정">PR #1167 · Tests &amp; type fixes</a>
+          </div>
         </div>
       </section>
     </main>

@@ -31,7 +31,9 @@
 
 첫 화면에서 영상 복원·self-supervised foundation model 연구와 3D reconstruction 관심을 함께 소개하고 NVIDIA Isaac Sim을 활용한 시뮬레이션을 강조합니다. 상단 키워드는 Image Restoration · Self-Supervised Learning · 3D Reconstruction · Digital Twin (Isaac Sim)으로 구성합니다. 연구 관심 분야는 같은 너비의 두 열로 배치하며 모바일에서는 세로로 표시합니다. Python / Go 등 구현 기술은 하단 기술 역량에 둡니다.
 
-Projects의 각 탭에는 데모와 조작 요소를 먼저 표시하고, 그 아래에 프로젝트명과 세 개의 bullet로 설명을 배치합니다. 한글은 `~함` 어체로 작성하며 영문도 같은 내용과 구조를 유지합니다. 3D Reconstruction 탭은 VGGT 기반 재구성·NVIDIA Triton Inference Server의 모델 서빙·NVIDIA Isaac Sim의 WebRTC 연동을 설명하고, 설명 아래에 GitHub 링크를 둡니다. Image Restoration 탭은 HDF-EC의 통합 노출 복원·Hierarchical Dual-Flow·일반화와 효율을 요약하며, 효율 수치는 별도 한 줄로 표시합니다. 두 탭의 데모·설명 아래에는 HVR-SSLE와 GoCV Contribution을 소개하고, HVR-SSLE 한글 설명도 `~함` 어체로 작성합니다.
+Projects의 각 탭에는 데모와 조작 요소를 먼저 표시하고, 그 아래에 프로젝트명과 세 개의 bullet로 설명을 배치합니다. 한글은 `~함` 어체로 작성하며 영문도 같은 내용과 구조를 유지합니다. 3D Reconstruction 탭은 VGGT 기반 재구성·NVIDIA Triton Inference Server의 모델 서빙·NVIDIA Isaac Sim의 WebRTC 연동을 설명하고, 설명 아래에 GitHub 링크를 둡니다. Image Restoration 탭은 HDF-EC의 통합 노출 복원·Hierarchical Dual-Flow·일반화와 효율을 요약하며, 효율 수치는 별도 한 줄로 표시합니다. Projects에는 두 대표 프로젝트의 데모·설명만 두고 Publications로 이어집니다.
+
+Publications에는 서지 아래에 핵심 기여와 논문 링크를 둡니다. 기여 설명은 12px로 표시하고 기존 줄 간격 비율을 유지합니다. HVR-SSLE는 Synthetic Data & Self-Supervised Learning, Hierarchical Recurrent Model, Zero-reference Generalization의 세 가지 기여를 각각 한 개의 bullet로 소개합니다. 코드 공개 여부는 기여 설명에서 제외합니다. 나머지 논문은 두 개의 짧은 bullet로 소개합니다. HVR-SSLE의 설명과 코드 링크는 첫 번째 논문 항목에 통합합니다. 한글 기여 설명은 `~함` 어체로 작성합니다. GoCV 기여는 Technical Skills 하단의 오픈소스 기여 소제목 아래에 설명하고, 병합된 PR #1142와 #1167 링크를 제공합니다.
 
 3D 데모와 프로젝트 설명 사이에는 입력 사진 6장을 썸네일로 배치합니다. VGGT가 여러 시점의 사진에서 3D 구조를 추정하는 모델임을 설명하고, 전체 원본 25장 중 일부를 보여준다는 점을 표시합니다. 데스크톱에서는 6열, 좁은 화면에서는 3열로 배치하며 사진은 원래 비율을 유지합니다. 선택한 원본 파일을 그대로 사용하고, 화면에는 작게 표시하며 지연 로딩합니다.
 
@@ -42,6 +44,8 @@ Background는 학력 다음에 인빅 경력을 본문 너비의 독립 블록�
 VGGT-ISAAC-SIM 설명은 사용자가 제공한 `vggt-isaac-sim-portfolio.md`(2026-09-07)를 기준으로 요약했습니다. 사전 학습된 VGGT 모델의 서비스화, Triton 모델 상주와 추론 분리, OpenUSD 변환과 Isaac Sim의 실시간 렌더링·탐색, GPU 재추론 없는 confidence 필터 조절을 구현 범위로 소개합니다.
 
 연구 설명은 제공받은 포트폴리오 wiki의 `research/overview.md`와 `research/thesis-summary.md`, 연구 수치와 성과 구분은 `research/verification.md`를 기준으로 요약했습니다. HDF-EC는 합성 데이터 기반의 공통 Foundation Model, latent transport를 통한 통합 노출 복원, 학습하지 않은 환경에서의 일반화를 중심으로 소개합니다. HVR-SSLE는 평가 대상의 학습 데이터나 추가 fine-tuning 없이 검증한 일반화 연구로 구분합니다. HDF-EC의 수치는 512×512 입력 기준이며 HVR-SSLE의 모델 크기와 구분합니다.
+
+공저 논문의 핵심 기여는 출판사 원문인 [5K 모델 논문](https://www.mdpi.com/2079-9292/13/10/1814)과 [AGCSNet 논문](https://onlinelibrary.wiley.com/doi/10.4218/etrij.2024-0294)을 기준으로 요약합니다. 논문 전체의 기여를 설명하며 개인 담당 역할을 추가로 추정하지 않습니다. GoCV PR 링크와 기여 범위는 `facts-industry.md`의 기록을 따릅니다.
 
 회사 경력은 `major-projects-summary.md`와 `facts-industry.md`의 수행 범위를 사용합니다. 공식 직급인 책임연구원과 개발1팀을 이끈 실무 역할을 구분하고, 실제 개발한 Go·TensorRT·FastAPI·gRPC 시스템을 중심으로 정리합니다. Omniverse·Isaac Sim의 과제 맥락은 이번 사용자의 설명을 반영합니다. 학위 상태는 wiki의 `materials.md`와 연구 산출물에 기재된 2026.08 박사 취득으로 반영했습니다.
 

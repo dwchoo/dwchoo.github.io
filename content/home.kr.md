@@ -53,19 +53,29 @@ VGGT는 같은 장면을 여러 시점에서 촬영한 사진으로 3D 구조를
 
 파라미터 **5.065M** · 연산량 **81.3 GFLOPs** · 추론 메모리 **0.420 GiB** — 512 × 512 입력 기준
 
-### HVR-SSLE
-
-[HVR-SSLE](https://github.com/dwchoo/HVR-SSLE): 합성 데이터만으로 학습한 저조도 영상 개선 모델의 일반화 가능성을 검증한 제1저자 연구로, *IEEE Access*에 게재함. 평가 대상의 학습 데이터나 별도의 fine-tuning 없이 새로운 환경에서 평가했으며, 모델을 0.354M 파라미터로 구현하고 PyTorch 코드를 공개함.
-
-### GoCV Contribution
-
-OpenCV CUDA 기능을 Go에서 사용하는 과정에서 누락된 Go wrapper 함수와 테스트·타입 오류를 보완함. 제안한 PR 2건이 공식 저장소에 병합됨
-
 ## 주요 논문
 
 - **D. Choo**, Q. Deng, T. Park, and D. Lee, "HVR-SSLE: Hierarchical Visual Reasoning for Self-Supervised Low-Light Image Enhancement," *IEEE Access*, vol. 14, pp. 34705-34725, 2026.
+
+  - **Synthetic Data & Self-Supervised Learning:** COCO 영상에 Parametric Curve를 적용해 저조도·정상 영상 쌍을 합성하고, self-supervised learning으로 복원을 학습함.
+  - **Hierarchical Recurrent Model:** CNN의 국소 보정과 Transformer의 전역 조정을 계층적으로 결합하고, 단계 간 가중치를 공유하며 반복 복원하도록 설계함.
+  - **Zero-reference Generalization:** 평가 대상 benchmark의 학습 데이터나 추가 fine-tuning 없이, 학습하지 않은 환경에서 일반화 가능성을 검증함.
+
+  [논문](https://doi.org/10.1109/ACCESS.2026.3665009) · [코드](https://github.com/dwchoo/HVR-SSLE)
+
 - Q. Deng, **D. Choo**, H. Ji, and D. Lee, "A 5K Efficient Low-Light Enhancement Model by Estimating Increment between Dark Image and Transmission Map Based on Local Maximum Color Value Prior," *Electronics*, vol. 13, p. 1814, 2024.
+
+  - 어두운 입력 영상과 RGB 투과 맵 사이의 증분을 추정하고, 색상 보정과 노이즈 제거를 결합해 저조도 영상을 개선함.
+  - 4.7K 파라미터의 경량 모델로 구현해 자원이 제한된 장치에서의 활용 부담을 줄임.
+
+  [논문](https://doi.org/10.3390/electronics13101814)
+
 - M.-j. Kim, Q. Deng, **D. Choo**, H. C. Ji, and D. Lee, "AGCSNet: High-contrast image-exposure correction with automatic illumination-map attention-based gamma and saturation correction," *ETRI Journal*, 2025.
+
+  - 조명 맵과 두 가지 gamma 보정을 활용해 한 영상 안의 어두운 영역과 과노출 영역을 함께 보정함.
+  - 입력 영상에 맞는 gamma·채도 계수를 예측하고, 노출 보정 과정에서 발생하는 채도 왜곡을 보완함.
+
+  [논문](https://doi.org/10.4218/etrij.2024-0294)
 
 ## 학력 및 경력
 
@@ -100,6 +110,14 @@ OpenCV CUDA 기능을 Go에서 사용하는 과정에서 누락된 Go wrapper �
 - Vision Systems: OpenCV, GoCV, Jetson, RTSP streaming, shared memory
 - AI Platforms: FastAPI, gRPC
 - 3D Tools: NVIDIA Isaac Sim, NVIDIA Omniverse, OpenUSD
+
+### 오픈소스 기여
+
+#### GoCV
+
+OpenCV CUDA 기능을 Go에서 사용하는 과정에서 누락된 Go wrapper 함수와 테스트·타입 오류를 보완함. 제안한 PR 2건이 공식 저장소에 병합됨.
+
+[PR #1142 · Stream 함수](https://github.com/hybridgroup/gocv/pull/1142) · [PR #1167 · 테스트·타입 수정](https://github.com/hybridgroup/gocv/pull/1167)
 
 <!-- 3D 뷰어 UI 원고 (구현 참고)
 3D 재구성을 불러오는 중…
