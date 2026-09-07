@@ -7,6 +7,7 @@ import unittest
 import numpy as np
 
 from export_pointcloud import export
+from export_pointcloud import sha256
 
 
 class ExportTests(unittest.TestCase):
@@ -89,6 +90,78 @@ class ExportTests(unittest.TestCase):
     def test_source_cannot_be_overwritten(self):
         with self.assertRaises(ValueError):
             export(self.source, self.source / "pointcloud.ply")
+
+    def save_reconstruction(self):
+        from PIL import Image
+
+        self.points = np.array([[10.5, -3.5, 3]], dtype=np.float32)
+        rgb = np.arange(18, dtype=np.uint8).reshape(2, 3, 3)
+        self.colors = rgb.reshape(-1, 3)[[5]]
+        self.cameras[0, :3, 3] = [10, -4, 2]
+        self.summary["point_counts"]["exported"] = 1
+        self.save()
+        np.savez(self.source / "pointcloud.npz", points_world_cv=self.points,
+                 colors_rgb=self.colors, camera_to_world_cv=self.cameras,
+                 source_flat_index=np.array([5], dtype=np.int64))
+        self.predictions = {
+            "depth": np.ones((1, 2, 3), dtype=np.float32),
+            "depth_conf": np.arange(1, 7, dtype=np.float32).reshape(1, 2, 3),
+            "valid_image_mask": np.array([[[False, True, True], [True, True, True]]]),
+            "intrinsic": np.array([[[2, 0, 1], [0, 2, 0], [0, 0, 1]]], dtype=np.float32),
+        }
+        np.savez(self.source / "predictions.npz", **self.predictions)
+        (self.source / "processed_images").mkdir()
+        image = self.source / "processed_images/frame_0000.png"
+        Image.fromarray(rgb).save(image)
+        (self.source / "input_manifest.json").write_text(json.dumps({
+            "frames": [{"processed_sha256": sha256(image)}],
+        }))
+
+    def test_recover_more_points_in_pixel_order(self):
+        self.save_reconstruction()
+        manifest = export(self.source, self.output, confidence_percentile=50)
+        data = self.output.read_bytes().split(b"end_header\n", 1)[1]
+        rows = np.frombuffer(data, dtype=[("xyz", "<f4", (3,)), ("rgb", "u1", (3,))])
+        np.testing.assert_array_equal(rows["xyz"], [[9.5, -3.5, 3], [10, -3.5, 3], [10.5, -3.5, 3]])
+        np.testing.assert_array_equal(rows["rgb"], [[9, 10, 11], [12, 13, 14], [15, 16, 17]])
+        self.assertEqual(manifest["reconstruction"]["reference_points_retained"], 1)
+        self.assertEqual(manifest["reconstruction"]["confidence_threshold"], 4)
+        self.assertIsNone(manifest["reconstruction"]["point_cap"])
+
+    def test_recovery_excludes_invalid_depth_and_padding(self):
+        self.save_reconstruction()
+        self.predictions["depth"][0, 0, 1] = 0
+        self.predictions["depth"][0, 0, 2] = np.nan
+        np.savez(self.source / "predictions.npz", **self.predictions)
+        manifest = export(self.source, self.output, confidence_percentile=0)
+        self.assertEqual(manifest["point_count"], 3)
+        self.assertEqual(manifest["reconstruction"]["valid_point_count"], 3)
+
+    def test_recovery_rejects_percentile_out_of_range(self):
+        self.save_reconstruction()
+        for percentile in [-1, 101, float("nan")]:
+            with self.subTest(percentile=percentile), self.assertRaises(ValueError):
+                export(self.source, self.output, confidence_percentile=percentile)
+
+    def test_recovery_rejects_changed_processed_image(self):
+        self.save_reconstruction()
+        (self.source / "processed_images/frame_0000.png").write_bytes(b"changed")
+        with self.assertRaisesRegex(ValueError, "checksum mismatch"):
+            export(self.source, self.output, confidence_percentile=50)
+
+    def test_recovery_rejects_wrong_depth_source(self):
+        self.save_reconstruction()
+        self.predictions["depth"][0, 1, 2] = 2
+        np.savez(self.source / "predictions.npz", **self.predictions)
+        with self.assertRaisesRegex(ValueError, "do not reproduce"):
+            export(self.source, self.output, confidence_percentile=50)
+
+    def test_recovery_rejects_bad_intrinsics(self):
+        self.save_reconstruction()
+        self.predictions["intrinsic"][0, 0, 0] = 0
+        np.savez(self.source / "predictions.npz", **self.predictions)
+        with self.assertRaisesRegex(ValueError, "intrinsics"):
+            export(self.source, self.output, confidence_percentile=50)
 
 
 if __name__ == "__main__":

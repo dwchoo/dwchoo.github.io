@@ -7,14 +7,14 @@ const manifestURL = new URL("../data/vggt/pointcloud.json", import.meta.url);
 const messages = {
   en: {
     loading: "Loading 3D reconstruction…",
-    ready: "453,253 points · Drag to rotate",
+    ready: "{count} points · Drag to rotate",
     file: "The 3D data could not be loaded. Please reload the page.",
     webgl: "3D graphics are unavailable. Please use a browser with WebGL enabled and reload.",
     canvas: "VGGT 3D reconstruction. Drag with the left mouse button or one finger to rotate.",
   },
   kr: {
     loading: "3D 재구성을 불러오는 중…",
-    ready: "453,253점 · 드래그하여 회전",
+    ready: "{count}점 · 드래그하여 회전",
     file: "3D 데이터를 불러올 수 없습니다. 페이지를 새로고침해 주세요.",
     webgl: "3D 그래픽을 사용할 수 없습니다. WebGL이 활성화된 브라우저에서 새로고침해 주세요.",
     canvas: "VGGT 3D 재구성. 왼쪽 마우스 버튼 또는 한 손가락으로 드래그하여 회전합니다.",
@@ -33,10 +33,11 @@ export function createPointcloudViewer(host, { language = "en", active = true } 
   let width = 0;
   let height = 0;
   let pixelRatio = 0;
+  let pointCount = 0;
 
   function setLanguage(value) {
     language = value === "kr" ? "kr" : "en";
-    status.textContent = messages[language][state];
+    status.textContent = messages[language][state].replace("{count}", pointCount.toLocaleString("en-US"));
     host.dataset.viewerState = state;
     host.setAttribute("aria-busy", String(state === "loading"));
     renderer?.domElement.setAttribute("aria-label", messages[language].canvas);
@@ -172,7 +173,7 @@ export function createPointcloudViewer(host, { language = "en", active = true } 
       if (!dataResponse.ok || !manifestResponse.ok) throw new Error("Asset request failed");
       const [buffer, manifest] = await Promise.all([dataResponse.arrayBuffer(), manifestResponse.json()]);
       if (disposed || state !== "loading") return;
-      if (buffer.byteLength !== manifest.byte_length || manifest.point_count !== 453253) {
+      if (buffer.byteLength !== manifest.byte_length || !Number.isSafeInteger(manifest.point_count) || manifest.point_count <= 0) {
         throw new Error("Unexpected point cloud size");
       }
       if (globalThis.crypto?.subtle) {
@@ -188,6 +189,7 @@ export function createPointcloudViewer(host, { language = "en", active = true } 
           !positions.array.every(Number.isFinite) || !colors.array.every(Number.isFinite)) {
         throw new Error("Invalid point cloud");
       }
+      pointCount = positions.count;
       geometry.computeBoundingBox();
       geometry.computeBoundingSphere();
       radius = geometry.boundingSphere.radius;
