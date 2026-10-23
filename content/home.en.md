@@ -79,10 +79,19 @@ Demo source: the [official VGGT Kitchen example](https://github.com/facebookrese
 
 ## Background
 
-### Education
+### UNIST
 
-- Pusan National University, B.S. in Electronics Engineering, 2010.03 - 2017.02
-- Pusan National University, Ph.D. in Information Convergence Engineering, AI Major, 2018.09 - 2026.08
+Postdoctoral Researcher
+
+October 2026 - Present
+
+Department of Civil, Urban, Earth, and Environmental Engineering
+
+[IRIS Lab](https://iris.unist.ac.kr) · PI: Prof. Jungho Im
+
+### Pusan National University — Ph.D.
+
+Pusan National University, Ph.D. in Information Convergence Engineering, AI Major, 2018.09 - 2026.08
 
 ### InBic Inc. (startup)
 
@@ -101,6 +110,10 @@ Senior Researcher (led Development Team 1)
 
 - Coordinated technical planning and partner collaboration for a DAPA R&D project involving 3D reconstruction and digital twins using NVIDIA Omniverse and Isaac Sim.
 - Developed image enhancement and object detection pipelines, and implemented an initial web integration demo of Omniverse visualization using WebRTC and provided OpenUSD samples.
+
+### Pusan National University — B.S.
+
+Pusan National University, B.S. in Electronics Engineering, 2010.03 - 2017.02
 
 ## Technical Skills
 
